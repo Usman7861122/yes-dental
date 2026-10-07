@@ -1,0 +1,16 @@
+---
+import { testimonials } from "../../data/testimonials";
+import SectionHeading from "../ui/SectionHeading.astro";
+import TestimonialSlider from "../../islands/TestimonialSlider";
+import Button from "../ui/Button.astro";
+---
+
+<section id="testimonials" class="section-y bg-sand">
+  <div class="container-x">
+    <SectionHeading eyebrow="Patient stories" title="Loved by our patients." align="center" />
+    <div class="mt-14">
+      <TestimonialSlider client:visible items={testimonials} />
+    </div>
+    <div class="mt-12 text-center"><Button href="/testimonials" variant="outline">Read All Reviews</Button></div>
+  </div>
+</section>

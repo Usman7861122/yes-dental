@@ -1,0 +1,35 @@
+---
+import { site } from "../../data/site";
+import Reveal from "../../islands/Reveal";
+import Icon from "../ui/Icon.astro";
+---
+
+<section
+  aria-labelledby="kids-title"
+  class="on-dark parallax-fixed relative isolate flex min-h-[100svh] items-center bg-ink py-24 text-center text-ivory"
+  style="background-image: url('/images/kids-parallax.jpg')"
+>
+  <div class="absolute inset-0 -z-10 bg-ink/70"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/50 via-transparent to-ink/60"></div>
+
+  <div class="container-x">
+    <Reveal client:visible>
+      <p class="eyebrow text-gold">Our family of care</p>
+      <h2 id="kids-title" class="h-display mx-auto mt-5 max-w-3xl">
+        Pediatric specialists affiliated with our group
+      </h2>
+      <p class="mt-10 font-display text-6xl font-semibold tracking-[0.08em] text-gold sm:text-8xl lg:text-9xl">
+        KIDS DENTAL
+      </p>
+      <p class="mt-4 text-xl text-ivory sm:text-2xl">operating out of 3 locations in NYC</p>
+      <p class="mx-auto mt-8 max-w-md text-mist">Please visit</p>
+      <div class="mt-4">
+        <a href={site.kids.url} target="_blank" rel="noopener noreferrer" class="btn btn-gold">
+          {site.kids.name}
+          <Icon name="arrow-up-right" size={18} />
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      </div>
+    </Reveal>
+  </div>
+</section>

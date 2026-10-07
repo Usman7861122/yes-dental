@@ -1,0 +1,100 @@
+---
+import { site, contactHref, type NavItem } from "../../data/site";
+import { menuServices, serviceHref } from "../../data/services";
+import MobileMenu from "../../islands/MobileMenu";
+import Icon from "../ui/Icon.astro";
+
+// Same nav for desktop and mobile; "Services" gets a wide dropdown, "Patient Forms" a small one.
+const nav: NavItem[] = site.nav.map((item): NavItem =>
+  item.label === "Services"
+    ? {
+        ...item,
+        wide: true,
+        viewAll: { label: "View all services", href: "/services" },
+        children: menuServices.map((s) => ({ label: s.title, href: serviceHref(s) })),
+      }
+    : item,
+);
+const itemCls =
+  "group relative inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-[0.86rem] font-semibold tracking-wide text-ink";
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-ivory">
+  <div class="container-x flex h-[4.75rem] items-center justify-between gap-4">
+    <a href="/" aria-label={`${site.name} – home`} class="shrink-0">
+      <img src="/images/logo.png" alt={site.name} width="970" height="248" class="h-12 w-auto xl:h-14" />
+    </a>
+
+    <nav aria-label="Main" class="hidden xl:block">
+      <ul class="flex items-center gap-5 2xl:gap-8">
+        {
+          nav.map((item) => (
+            <li class="group/menu relative">
+              {item.href ? (
+                <a href={item.href} class={itemCls}>
+                  {item.label}
+                  {item.children && (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="transition-transform duration-300 group-hover/menu:rotate-180 group-focus-within/menu:rotate-180">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  )}
+                  <span class="absolute inset-x-0 bottom-1.5 h-px origin-left scale-x-0 bg-gold-deep transition-transform duration-300 group-hover:scale-x-100" />
+                </a>
+              ) : (
+                <button type="button" aria-haspopup="true" class={itemCls}>
+                  {item.label}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="transition-transform duration-300 group-hover/menu:rotate-180 group-focus-within/menu:rotate-180">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                  <span class="absolute inset-x-0 bottom-1.5 h-px origin-left scale-x-0 bg-gold-deep transition-transform duration-300 group-hover:scale-x-100" />
+                </button>
+              )}
+
+              {item.children && (
+                <div
+                  class:list={[
+                    "invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition duration-200 group-hover/menu:visible group-hover/menu:translate-y-0 group-hover/menu:opacity-100 group-focus-within/menu:visible group-focus-within/menu:translate-y-0 group-focus-within/menu:opacity-100",
+                    item.wide ? "w-[36rem]" : "w-80",
+                  ]}
+                >
+                  <div class="rounded-2xl border border-line bg-white p-3 shadow-[0_30px_60px_-30px_rgba(14,26,58,0.45)]">
+                    <ul class:list={["grid gap-x-2", item.wide ? "grid-cols-2" : "grid-cols-1"]}>
+                      {item.children.map((c) => (
+                        <li>
+                          <a
+                            href={c.href}
+                            {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            class="flex min-h-11 items-center gap-3 rounded-xl px-4 text-[0.92rem] font-semibold text-ink transition-colors hover:bg-sand"
+                          >
+                            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+                            {c.label}
+                            {c.external && <span class="sr-only"> (opens in a new tab)</span>}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    {item.viewAll && (
+                      <a href={item.viewAll.href} class="mt-2 flex min-h-11 items-center justify-between rounded-xl bg-ink px-5 text-[0.9rem] font-semibold text-ivory transition-colors hover:bg-ink-soft">
+                        {item.viewAll.label}
+                        <Icon name="arrow-right" size={18} class="text-gold" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href={`tel:${site.phone.tel}`} class="hidden min-h-11 items-center gap-2 whitespace-nowrap text-[0.9rem] font-semibold text-ink 2xl:flex">
+        <Icon name="phone" size={18} class="text-gold-deep" />
+        {site.phone.display}
+      </a>
+      <a href={contactHref} class="btn btn-ink hidden !min-h-11 whitespace-nowrap !px-5 sm:inline-flex"><span class="2xl:hidden">Appointment</span><span class="hidden 2xl:inline">Request Appointment</span></a>
+      <MobileMenu client:media="(max-width: 1279px)" nav={nav} phone={site.phone.display} tel={site.phone.tel} contactHref={contactHref} />
+    </div>
+  </div>
+</header>

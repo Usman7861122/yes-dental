@@ -1,0 +1,77 @@
+---
+import Reveal from "../../islands/Reveal";
+import Icon from "../ui/Icon.astro";
+import Button from "../ui/Button.astro";
+
+const { cta = { label: "Learn More About Us", href: "/about" } } = Astro.props;
+const points = [
+  "Experienced doctors and specialists in one practice",
+  "Gentle, patient-first care for every age",
+  "Conveniently located at 617 West 181st Street, Manhattan",
+];
+---
+
+<section id="about" class="section-y overflow-hidden bg-ivory">
+  <div class="container-x grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
+    <Reveal client:visible>
+      <div class="relative mx-auto max-w-md pb-16 lg:mx-0 lg:max-w-none lg:pb-20 lg:pr-20">
+        <div class="relative">
+          <span class="absolute -left-4 -top-4 hidden h-full w-full rounded-t-[999px] border border-gold sm:block" aria-hidden="true"></span>
+          <img
+            src="/images/about-consult.jpg"
+            alt="A dentist speaking with a patient in a bright, modern treatment room"
+            width="1400"
+            height="1050"
+            loading="lazy"
+            class="relative aspect-[4/5] w-full rounded-t-[999px] object-cover"
+          />
+        </div>
+        <img
+          src="/images/clinic-modern.jpg"
+          alt="Modern dental treatment room with natural light"
+          width="1600"
+          height="1070"
+          loading="lazy"
+          class="absolute -bottom-0 right-0 aspect-[4/3] w-3/5 rounded-2xl border-[6px] border-ivory object-cover shadow-xl lg:w-1/2"
+        />
+      </div>
+    </Reveal>
+
+    <div>
+      <Reveal client:visible>
+        <p class="eyebrow text-gold-deep">About us</p>
+        <h2 class="h-display mt-4">Dentistry that feels as good as it looks.</h2>
+        <span class="mt-7 block h-px w-16 bg-crimson"></span>
+      </Reveal>
+
+      <Reveal client:visible delay={0.1}>
+        <p class="mt-8 text-lg text-mute">
+          At Yes Dental we care for families across Manhattan. We
+          combine the skill of experienced specialists with a calm, welcoming space, so that every visit feels
+          comfortable and every result looks natural.
+        </p>
+        <p class="mt-5 text-lg text-mute">
+          From a simple cleaning to a complete smile makeover, we plan your care with you, explain every step in
+          plain words, and never rush.
+        </p>
+
+        <ul class="mt-8 space-y-4">
+          {
+            points.map((p) => (
+              <li class="flex items-start gap-4">
+                <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/25 text-gold-deep">
+                  <Icon name="check" size={16} stroke={2.2} />
+                </span>
+                <span class="text-ink">{p}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-10">
+          <Button href={cta.href} variant="ink">{cta.label}</Button>
+        </div>
+      </Reveal>
+    </div>
+  </div>
+</section>

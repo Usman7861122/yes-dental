@@ -1,0 +1,49 @@
+---
+import Reveal from "../../islands/Reveal";
+import Icon from "../ui/Icon.astro";
+
+const covers = ["General care", "Professional cleanings", "Root canals", "Orthodontic treatment"];
+---
+
+<section id="membership" class="on-dark relative isolate overflow-hidden bg-ink section-y text-ivory">
+  <div class="absolute -right-40 -top-40 -z-10 h-[40rem] w-[40rem] rounded-full bg-gold/10 blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -bottom-52 -left-40 -z-10 h-[36rem] w-[36rem] rounded-full bg-gold/5 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="relative rounded-[2rem] border border-gold/40 p-2 sm:p-3">
+        <div class="grid gap-12 rounded-[1.5rem] border border-gold/20 bg-ink-soft/70 p-8 sm:p-12 lg:grid-cols-2 lg:items-center lg:gap-20 lg:p-16">
+          <div>
+            <p class="eyebrow text-gold">Discount membership</p>
+            <p class="mt-6 font-display text-[7rem] font-medium leading-none text-gold sm:text-[10rem]">50<span class="text-6xl sm:text-8xl">%+</span></p>
+            <p class="mt-2 font-display text-3xl text-ivory sm:text-4xl">off our regular fees</p>
+          </div>
+
+          <div>
+            <h2 class="h-display text-ivory">Premium care, made simple.</h2>
+            <p class="mt-6 text-lg text-mist">
+              Join our annual membership and enjoy exclusive savings on the care your family needs most. No
+              insurance required.
+            </p>
+            <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+              {
+                covers.map((c) => (
+                  <li class="flex items-center gap-3">
+                    <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
+                      <Icon name="check" size={16} stroke={2.2} />
+                    </span>
+                    {c}
+                  </li>
+                ))
+              }
+            </ul>
+            <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+              <a href="/contact-us" class="btn btn-gold">Join the Membership</a>
+              <a href="/#insurance" class="btn btn-outline-light">Insurance Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  </div>
+</section>

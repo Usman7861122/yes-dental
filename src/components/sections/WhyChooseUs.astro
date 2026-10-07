@@ -1,0 +1,27 @@
+---
+import { whySteps } from "../../data/why";
+import { icons } from "../../lib/icons";
+import Reveal from "../../islands/Reveal";
+import WhyTimeline from "../../islands/WhyTimeline";
+---
+
+<section id="why" class="on-dark relative isolate overflow-hidden bg-ink section-y text-ivory">
+  <!-- faint tooth watermark -->
+  <svg viewBox="0 0 24 24" aria-hidden="true" class="pointer-events-none absolute -left-24 top-24 -z-10 h-[34rem] w-[34rem] text-white/[0.03]" fill="currentColor">
+    <path d={icons.tooth[0]}></path>
+  </svg>
+
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="eyebrow text-gold">Why choose us</p>
+        <h2 class="h-display mt-5 text-ivory">
+          Your path to a <em class="font-medium italic text-crimson-light">healthy smile.</em>
+        </h2>
+        <p class="mt-6 text-lg text-mist">What a visit with us looks like, from your first call to your last follow-up.</p>
+      </div>
+    </Reveal>
+
+    <WhyTimeline client:visible steps={whySteps} />
+  </div>
+</section>

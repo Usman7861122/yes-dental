@@ -1,0 +1,94 @@
+---
+import { site, mapsUrl } from "../../data/site";
+import { services, serviceHref } from "../../data/services";
+---
+
+<footer class="on-dark bg-ink-deep text-mist">
+  <div class="container-x py-16 lg:py-20">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <a href="/" aria-label={`${site.name} – home`} class="inline-block rounded-2xl bg-ivory px-5 py-3">
+          <img src="/images/logo.png" alt={site.name} width="970" height="248" loading="lazy" class="h-11 w-auto" />
+        </a>
+        <p class="mt-6 max-w-sm">{site.description}</p>
+        {
+          site.social.length > 0 && (
+            <ul class="mt-6 flex gap-6">
+              {site.social.map((s) => (
+                <li>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+
+      <nav aria-label="Footer" class="lg:col-span-2">
+        <h3 class="eyebrow text-gold">Explore</h3>
+        <ul class="mt-5 space-y-1">
+          {
+            site.nav.filter((i) => i.href).map((i) => (
+              <li>
+                <a href={i.href} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{i.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="lg:col-span-2">
+        <h3 class="eyebrow text-gold">Services</h3>
+        <ul class="mt-5 space-y-1">
+          {
+            services
+              .filter((s) => s.featured)
+              .map((s) => (
+                <li>
+                  <a href={serviceHref(s)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{s.title}</a>
+                </li>
+              ))
+          }
+          <li>
+            <a href="/services" class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">View all services</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h3 class="eyebrow text-gold">Visit us</h3>
+        <address class="mt-5 not-italic leading-relaxed">
+          <span class="font-semibold text-ivory">{site.name}</span><br />
+          {site.address.street}<br />
+          {site.address.city}
+        </address>
+        <ul class="mt-4 space-y-1">
+          <li><a href={`tel:${site.phone.tel}`} class="inline-flex min-h-11 items-center transition-colors hover:text-gold">{site.phone.display}</a></li>
+          <li><a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center break-all transition-colors hover:text-gold">{site.email}</a></li>
+          <li>
+            <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">
+              Get directions<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-3 border-t border-white/10 pt-8 text-sm sm:flex-row sm:items-center sm:justify-between">
+      <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+      <ul class="flex flex-wrap items-center gap-x-6">
+        <li><a href="/privacy-policy" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Privacy Policy</a></li>
+        <li><a href="/terms-and-conditions" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Terms &amp; Conditions</a></li>
+        <li><a href="/accessibility-policy" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Accessibility</a></li>
+        <li><button type="button" id="cookie-settings" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Cookie settings</button></li>
+      </ul>
+    </div>
+    <script is:inline>
+      document.getElementById("cookie-settings")?.addEventListener("click", function () {
+        window.dispatchEvent(new Event("yd:open-cookies"));
+      });
+    </script>
+  </div>
+</footer>

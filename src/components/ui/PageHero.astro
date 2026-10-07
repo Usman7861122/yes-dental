@@ -1,0 +1,25 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent?: string; // highlighted last word(s)
+  intro?: string;
+}
+const { eyebrow, title, accent, intro } = Astro.props;
+---
+
+<section class="on-dark relative isolate overflow-hidden bg-ink text-ivory">
+  <div class="absolute -right-32 -top-32 -z-10 h-[30rem] w-[30rem] rounded-full bg-gold/10 blur-3xl" aria-hidden="true"></div>
+  <div class="container-x pb-14 pt-14 lg:pb-20 lg:pt-20">
+    <nav aria-label="Breadcrumb" class="text-sm text-mist">
+      <a href="/" class="inline-flex min-h-8 items-center hover:text-ivory">Home</a>
+      <span aria-hidden="true" class="mx-2">/</span>
+      <span aria-current="page" class="text-ivory">{eyebrow}</span>
+    </nav>
+    <h1 class="h-hero mt-10 max-w-4xl !text-[clamp(2.8rem,6.5vw,5.5rem)]">
+      {title}{accent && <> <em class="font-medium italic text-crimson-light">{accent}</em></>}
+    </h1>
+    {intro && <p class="mt-7 max-w-2xl text-lg text-mist sm:text-xl">{intro}</p>}
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, contactHref } from "../data/site";
+import PageHero from "../components/ui/PageHero.astro";
+import About from "../components/sections/About.astro";
+import WhyChooseUs from "../components/sections/WhyChooseUs.astro";
+import KidsParallax from "../components/sections/KidsParallax.astro";
+import Locations from "../components/sections/Locations.astro";
+import Reveal from "../islands/Reveal";
+import Icon from "../components/ui/Icon.astro";
+import Button from "../components/ui/Button.astro";
+
+const promises = [
+  { icon: "shield-check", title: "Experienced Team", text: "Skilled dental professionals providing personalized care for every patient." },
+  { icon: "tooth", title: "Complete Dentistry", text: "Comprehensive treatments designed to support healthy, confident smiles." },
+];
+---
+
+<BaseLayout title="About Us | Yes Dental" description="Meet Yes Dental in Manhattan: an experienced team providing personalized, complete dentistry for the whole family.">
+  <PageHero
+    eyebrow="About"
+    title="About"
+    accent="Yes Dental."
+    intro="An experienced team, a calm and welcoming office, and complete dentistry for every member of your family."
+  />
+
+  <About cta={{ label: "Request Appointment", href: contactHref }} />
+
+  <section class="bg-sand py-20 lg:py-24">
+    <div class="container-x">
+      <ul class="grid gap-6 md:grid-cols-2">
+        {
+          promises.map((p, i) => (
+            <li>
+              <Reveal client:visible delay={i * 0.08} className="h-full">
+                <div class="h-full rounded-2xl bg-white p-9 shadow-[0_20px_50px_-35px_rgba(14,26,58,0.5)]">
+                  <span class="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-gold"><Icon name={p.icon} size={26} /></span>
+                  <h2 class="mt-6 text-4xl text-ink">{p.title}</h2>
+                  <p class="mt-3 text-lg text-mute">{p.text}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <WhyChooseUs />
+  <KidsParallax />
+  <Locations tone="ivory" />
+
+  <section class="on-dark bg-ink py-20 text-ivory lg:py-24">
+    <div class="container-x flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+      <div>
+        <h2 class="h-display max-w-2xl">Come and <em class="font-medium italic text-crimson-light">meet us.</em></h2>
+        <p class="mt-5 text-lg text-mist">{site.address.street}, {site.address.city} · {site.phone.display}</p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <Button href={contactHref} variant="gold">Request Appointment</Button>
+        <Button href={`tel:${site.phone.tel}`} variant="outline-light">Call {site.phone.display}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

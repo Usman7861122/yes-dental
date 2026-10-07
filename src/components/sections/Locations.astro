@@ -1,0 +1,63 @@
+---
+import { site, mapsUrl, mapEmbedUrl } from "../../data/site";
+import Reveal from "../../islands/Reveal";
+import Icon from "../ui/Icon.astro";
+const { tone = "sand" } = Astro.props;
+---
+
+<section id="locations" class:list={["section-y", tone === "sand" ? "bg-sand" : "bg-ivory"]}>
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div class="max-w-2xl">
+          <p class="eyebrow text-gold-deep">Visit us</p>
+          <h2 class="h-display mt-4">
+            Find us in <em class="font-medium italic text-crimson">Manhattan.</em>
+          </h2>
+        </div>
+        <p class="max-w-sm text-mute">Easy to reach, with a warm welcome waiting for you.</p>
+      </div>
+    </Reveal>
+
+    <Reveal client:visible delay={0.1} className="mt-10">
+      <div class="rounded-[1.75rem] bg-white p-3 shadow-[0_30px_60px_-40px_rgba(14,26,58,0.45)] sm:p-6">
+        <div class="overflow-hidden rounded-2xl bg-sand">
+          <iframe
+            title={`Map showing ${site.name} at ${site.address.street}, ${site.address.city}`}
+            src={mapEmbedUrl}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            class="block h-[360px] w-full border-0 md:h-[500px]"></iframe>
+        </div>
+
+        <div class="on-dark mt-4 rounded-2xl bg-ink px-6 py-7 text-ivory sm:px-8">
+          <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div class="lg:flex lg:items-center lg:gap-10">
+              <div>
+                <p class="eyebrow text-gold">Manhattan</p>
+                <p class="mt-1 whitespace-nowrap font-display text-4xl leading-tight">{site.name}</p>
+              </div>
+              <address class="mt-4 text-[0.95rem] not-italic leading-relaxed text-mist lg:mt-0 lg:whitespace-nowrap lg:border-l lg:border-white/15 lg:pl-10">
+                {site.address.street}<br />
+                {site.address.city}<br />
+                <a href={`mailto:${site.email}`} class="inline-flex min-h-8 items-center text-ivory underline decoration-gold/50 underline-offset-4 transition-colors hover:text-gold">{site.email}</a>
+              </address>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a href={`tel:${site.phone.tel}`} class="btn btn-outline-light !min-h-11 !px-6">
+                <Icon name="phone" size={16} />
+                {site.phone.display}
+              </a>
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-gold !min-h-11 !px-6">
+                Get directions
+                <span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  </div>
+</section>

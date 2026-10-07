@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { services, serviceHref } from "../data/services";
+import Reveal from "../islands/Reveal";
+import ServiceCard from "../components/ui/ServiceCard.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<BaseLayout title="Our Services | Yes Dental" description="Dental implants, dentures, crowns, orthodontics, root canals, veneers and more at Yes Dental in Manhattan.">
+  <section class="on-dark bg-ink pb-20 pt-20 text-ivory lg:pb-28 lg:pt-28">
+    <div class="container-x">
+      <p class="eyebrow text-gold">Our services</p>
+      <h1 class="h-hero mt-5 max-w-4xl">Every kind of care, <em class="font-medium italic text-gold">beautifully</em> done.</h1>
+      <p class="mt-8 max-w-xl text-lg text-mist">
+        Ten services, one trusted team. Choose a service to learn more, or request an appointment and we will guide you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-y bg-ivory">
+    <div class="container-x grid gap-6 lg:grid-cols-2">
+      {
+        services.map((s, i) => (
+          <Reveal client:visible delay={(i % 2) * 0.08} className="h-full">
+            <ServiceCard service={s} index={i} tall href={serviceHref(s)} cta="Learn more" />
+          </Reveal>
+        ))
+      }
+    </div>
+    <div class="mt-16 text-center">
+      <Button href="/contact-us" variant="gold">Request Appointment</Button>
+    </div>
+  </section>
+</BaseLayout>

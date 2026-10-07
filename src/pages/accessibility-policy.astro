@@ -1,0 +1,40 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site, fullAddress } from "../data/site";
+---
+
+<LegalLayout title="Accessibility Policy" description="Yes Dental's commitment to making our website and our office accessible to everyone." updated="October 7, 2026">
+  <p>
+    {site.name} wants everyone to be able to use our website and to receive care at our office. We are committed to making our website easy to use for people with disabilities, including people who use assistive technology.
+  </p>
+
+  <h2>Our goal</h2>
+  <p>We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA. These guidelines help make web content more perceivable, operable, understandable and robust.</p>
+
+  <h2>What we do</h2>
+  <ul>
+    <li>Use clear headings, labels and page structure so the site works with screen readers.</li>
+    <li>Make the whole site usable with a keyboard, with a visible focus outline and a "Skip to content" link.</li>
+    <li>Choose text and background colors with strong contrast.</li>
+    <li>Provide text descriptions for meaningful images.</li>
+    <li>Make buttons and links large enough to tap easily on phones and tablets.</li>
+    <li>Respect your device's "reduce motion" setting by turning off or reducing animations.</li>
+    <li>Make the layout work on screens of different sizes and when text is enlarged.</li>
+    <li>Label form fields clearly and show helpful error messages.</li>
+  </ul>
+
+  <h2>Known limitations</h2>
+  <p>We work to improve the site all the time, but some parts may not yet be fully accessible. For example, the embedded map and some third-party content are provided by other companies and may not meet every guideline. If you cannot use any part of the site, please contact us and we will give you the information another way.</p>
+
+  <h2>Accessibility at our office</h2>
+  <p>If you need help or an adjustment for your visit, such as step-free access, extra time, or information in another format, please tell us when you book. We will do our best to make your visit comfortable.</p>
+
+  <h2>Tell us how we can improve</h2>
+  <p>If you have difficulty using this website, or you have an idea to make it better, please contact us. Tell us the page, what happened and the device or assistive technology you use. We aim to reply promptly.</p>
+  <p>
+    {site.name}<br />
+    {fullAddress}<br />
+    Phone: <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a><br />
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+</LegalLayout>

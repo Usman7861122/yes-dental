@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, contactHref } from "../data/site";
+import PageHero from "../components/ui/PageHero.astro";
+import Insurance from "../components/sections/Insurance.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<BaseLayout title="Insurance and Financing Options | Yes Dental" description="Yes Dental accepts most major dental insurance plans and offers flexible payment options in Manhattan. Call (212) 781-0700.">
+  <PageHero
+    eyebrow="Insurance"
+    title="Insurance and"
+    accent="financing options."
+    intro="We work with most major plans and offer flexible ways to pay, so great dental care fits your budget."
+  />
+  <Insurance page />
+  <section class="on-dark bg-ink py-20 text-ivory lg:py-24">
+    <div class="container-x flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+      <div>
+        <h2 class="h-display max-w-2xl">Not sure what your plan <em class="font-medium italic text-crimson-light">covers?</em></h2>
+        <p class="mt-5 text-lg text-mist">Tell us your insurance and we will check your benefits before your visit.</p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <Button href={contactHref} variant="gold">Request Appointment</Button>
+        <Button href={`tel:${site.phone.tel}`} variant="outline-light">Call {site.phone.display}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

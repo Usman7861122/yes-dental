@@ -1,0 +1,50 @@
+---
+import Icon from "./Icon.astro";
+import type { Service } from "../../data/services";
+
+interface Props {
+  service: Service;
+  href: string;
+  cta: string;
+  index: number;
+  external?: boolean;
+  tall?: boolean;
+}
+const { service: s, href, cta, index, external = false, tall = false } = Astro.props;
+---
+
+<a
+  href={href}
+  id={tall ? s.slug : undefined}
+  class:list={[
+    "on-dark group relative isolate flex scroll-mt-28 flex-col justify-end overflow-hidden rounded-2xl bg-ink p-8 text-ivory shadow-[0_20px_50px_-30px_rgba(14,26,58,0.6)] transition duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-26px_rgba(14,26,58,0.7)] lg:p-10",
+    tall ? "min-h-[24rem] lg:min-h-[28rem]" : "min-h-[26rem] lg:min-h-[30rem]",
+  ]}
+  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+>
+  <img
+    src={s.image}
+    alt=""
+    width="1000"
+    height="667"
+    loading="lazy"
+    decoding="async"
+    class="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
+  />
+  <span class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/75 to-ink/10 transition-opacity duration-500 group-hover:via-ink/85"></span>
+  <span class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-white/10 transition duration-500 group-hover:ring-gold/60"></span>
+
+  <span class="absolute left-8 top-8 font-display text-xl text-gold lg:left-10 lg:top-10">{String(index + 1).padStart(2, "0")}</span>
+  <span class="absolute right-8 top-8 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-ink/40 text-gold backdrop-blur-sm transition-colors duration-500 group-hover:border-gold group-hover:bg-gold group-hover:text-ink lg:right-10 lg:top-10">
+    <Icon name={s.icon} size={22} />
+  </span>
+
+  <h3 class="text-4xl text-ivory">{s.title}</h3>
+  <span class="mt-4 block h-px w-12 bg-gold transition-all duration-500 group-hover:w-24"></span>
+  <p class="mt-4 max-w-xl text-mist">{s.summary}</p>
+  <span class="mt-6 inline-flex items-center gap-2 text-[0.9rem] font-semibold text-gold">
+    {cta}
+    {external && <span class="sr-only"> (opens in a new tab)</span>}
+    <Icon name={external ? "arrow-up-right" : "arrow-right"} size={18} class="transition-transform duration-300 group-hover:translate-x-1.5" />
+  </span>
+</a>

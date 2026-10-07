@@ -1,0 +1,51 @@
+---
+import { services, serviceHref } from "../../data/services";
+import Reveal from "../../islands/Reveal";
+import SectionHeading from "../ui/SectionHeading.astro";
+import ServiceCard from "../ui/ServiceCard.astro";
+import Button from "../ui/Button.astro";
+
+const featured = services.filter((s) => s.featured);
+const more = services.filter((s) => !s.featured);
+---
+
+<section id="services" class="section-y bg-sand">
+  <div class="container-x">
+    <Reveal client:visible>
+      <SectionHeading
+        eyebrow="Our services"
+        title="Complete care for every smile."
+        intro="From everyday prevention to advanced restoration, everything you need is in one trusted practice."
+      />
+    </Reveal>
+
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        featured.map((s, i) => (
+          <Reveal client:visible delay={(i % 3) * 0.08} className="h-full">
+            <ServiceCard service={s} href={serviceHref(s)} cta="Learn more" index={i} />
+          </Reveal>
+        ))
+      }
+    </div>
+
+    <Reveal client:visible className="mt-16">
+      <h3 class="eyebrow text-center text-gold-deep">And more</h3>
+      <ul class="mx-auto mt-6 flex max-w-4xl flex-wrap justify-center gap-3">
+        {
+          more.map((s) => (
+            <li>
+              <a href={serviceHref(s)} class="inline-flex min-h-11 items-center rounded-full border border-ink/20 bg-ivory px-5 text-[0.9rem] font-semibold text-ink transition duration-300 hover:border-gold-deep hover:bg-white">
+                {s.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </Reveal>
+
+    <div class="mt-12 text-center">
+      <Button href="/services" variant="outline">View All Services</Button>
+    </div>
+  </div>
+</section>

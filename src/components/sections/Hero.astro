@@ -1,0 +1,54 @@
+---
+import HeroImage from "../../islands/HeroImage";
+import Icon from "../ui/Icon.astro";
+
+const facts = [
+  { big: "10", small: "Dental services under one roof" },
+  { big: "50%+", small: "Savings with our membership" },
+  { big: "14+", small: "Insurance plans accepted" },
+];
+---
+
+<section class="on-dark relative isolate flex min-h-[calc(100svh-4.75rem)] flex-col overflow-hidden bg-ink text-ivory">
+  <!-- Photo + overlays -->
+  <div class="absolute inset-0 -z-10">
+    <HeroImage client:load src="/images/hero-smile.jpg" alt="A woman laughing, showing a bright, healthy smile" width={1800} height={1200} />
+    <div class="absolute inset-0 bg-ink/65 lg:hidden"></div>
+    <div class="absolute inset-0 hidden bg-[linear-gradient(90deg,#0e1a3a_0%,#0e1a3a_34%,rgba(14,26,58,0.6)_58%,rgba(14,26,58,0.1)_100%)] lg:block"></div>
+    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent"></div>
+  </div>
+
+  <div class="container-x flex flex-1 items-center py-20 lg:py-24">
+    <div class="max-w-3xl">
+      <p class="eyebrow rise text-gold" style="--d:0.1s">Manhattan · New York City</p>
+      <h1 class="h-hero rise mt-6" style="--d:0.25s">
+        The art of a <em class="font-medium italic text-crimson-light">confident</em> smile.
+      </h1>
+      <p class="rise mt-8 max-w-xl text-lg text-mist sm:text-xl" style="--d:0.45s">
+        Skilled dental professionals providing personalized care for every patient. Comprehensive treatments designed
+        to support healthy, confident smiles.
+      </p>
+      <div class="rise mt-10 flex flex-col gap-4 sm:flex-row" style="--d:0.6s">
+        <a href="/contact-us" class="btn btn-gold">
+          Request Appointment
+          <Icon name="arrow-right" size={18} />
+        </a>
+        <a href="/#services" class="btn btn-outline-light">Explore Services</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fact strip -->
+  <div class="rise border-t border-white/15 bg-ink/50" style="--d:0.8s">
+    <dl class="container-x grid grid-cols-3 divide-x divide-white/15">
+      {
+        facts.map((f) => (
+          <div class="px-3 py-5 text-center sm:px-8 sm:py-7 sm:text-left sm:first:pl-0">
+            <dt class="font-display text-3xl text-gold sm:text-5xl">{f.big}</dt>
+            <dd class="mt-1 text-xs leading-snug text-mist sm:text-sm">{f.small}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
