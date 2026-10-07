@@ -53,7 +53,7 @@ export default function CookieBanner() {
     <div
       role="region"
       aria-label="Cookie consent"
-      className={`fixed inset-x-0 bottom-0 z-50 p-3 transition duration-500 ease-out motion-reduce:transition-none sm:p-5 ${
+      className={`fixed inset-x-0 bottom-[calc(69px+env(safe-area-inset-bottom))] z-50 p-3 transition duration-500 ease-out motion-reduce:transition-none md:bottom-0 sm:p-5 ${
         show ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       }`}
     >

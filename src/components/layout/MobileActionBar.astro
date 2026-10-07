@@ -1,0 +1,22 @@
+---
+import { site, contactHref } from "../../data/site";
+import Icon from "../ui/Icon.astro";
+---
+
+<!-- Phones only: Call + Appointment stay within reach at the bottom of the screen -->
+<div
+  id="mobile-action-bar"
+  class="on-dark fixed inset-x-0 bottom-0 z-40 border-t border-white/15 bg-ink-deep md:hidden"
+  style="padding-bottom: env(safe-area-inset-bottom)"
+>
+  <nav aria-label="Quick actions" class="grid grid-cols-2 gap-3 px-3 py-2.5">
+    <a href={`tel:${site.phone.tel}`} class="btn btn-outline-light !min-h-12 !gap-2 !px-3 !text-[0.9rem]">
+      <Icon name="phone" size={18} />
+      <span class="sr-only">Call </span>{site.phone.display}
+    </a>
+    <a href={contactHref} class="btn btn-gold !min-h-12 !gap-2 !px-3 !text-[0.9rem]">
+      <Icon name="calendar" size={18} />
+      Appointment
+    </a>
+  </nav>
+</div>
