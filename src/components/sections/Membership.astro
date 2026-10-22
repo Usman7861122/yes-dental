@@ -2,7 +2,31 @@
 import Reveal from "../../islands/Reveal";
 import Icon from "../ui/Icon.astro";
 
-const covers = ["General care", "Professional cleanings", "Root canals", "Orthodontic treatment"];
+import { getLang, lp } from "../../i18n";
+import { contactHref } from "../../data/site";
+
+const lang = getLang(Astro);
+const copy = {
+  en: {
+    covers: ["General care", "Professional cleanings", "Root canals", "Orthodontic treatment"],
+    eyebrow: "Discount membership",
+    off: "off our regular fees",
+    title: "Premium care, made simple.",
+    text: "Join our annual membership and enjoy exclusive savings on the care your family needs most. No insurance required.",
+    join: "Join the Membership",
+    ins: "Insurance Options",
+  },
+  es: {
+    covers: ["Atención general", "Limpiezas profesionales", "Tratamientos de conducto", "Tratamiento de ortodoncia"],
+    eyebrow: "Membresía con descuento",
+    off: "de descuento en nuestras tarifas regulares",
+    title: "Atención premium, hecha simple.",
+    text: "Únase a nuestra membresía anual y disfrute de ahorros exclusivos en la atención que su familia más necesita. No se requiere seguro.",
+    join: "Unirme a la membresía",
+    ins: "Opciones de seguro",
+  },
+}[lang];
+const covers = copy.covers;
 ---
 
 <section id="membership" class="on-dark relative isolate overflow-hidden bg-ink section-y text-ivory">
@@ -14,16 +38,15 @@ const covers = ["General care", "Professional cleanings", "Root canals", "Orthod
       <div class="relative rounded-[2rem] border border-gold/40 p-2 sm:p-3">
         <div class="grid gap-12 rounded-[1.5rem] border border-gold/20 bg-ink-soft/70 p-8 sm:p-12 lg:grid-cols-2 lg:items-center lg:gap-20 lg:p-16">
           <div>
-            <p class="eyebrow text-gold">Discount membership</p>
+            <p class="eyebrow text-gold">{copy.eyebrow}</p>
             <p class="mt-6 font-display text-[7rem] font-medium leading-none text-gold sm:text-[10rem]">50<span class="text-6xl sm:text-8xl">%+</span></p>
-            <p class="mt-2 font-display text-3xl text-ivory sm:text-4xl">off our regular fees</p>
+            <p class="mt-2 font-display text-3xl text-ivory sm:text-4xl">{copy.off}</p>
           </div>
 
           <div>
-            <h2 class="h-display text-ivory">Premium care, made simple.</h2>
+            <h2 class="h-display text-ivory">{copy.title}</h2>
             <p class="mt-6 text-lg text-mist">
-              Join our annual membership and enjoy exclusive savings on the care your family needs most. No
-              insurance required.
+              {copy.text}
             </p>
             <ul class="mt-8 grid gap-4 sm:grid-cols-2">
               {
@@ -38,8 +61,8 @@ const covers = ["General care", "Professional cleanings", "Root canals", "Orthod
               }
             </ul>
             <div class="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a href="/contact-us" class="btn btn-gold">Join the Membership</a>
-              <a href="/#insurance" class="btn btn-outline-light">Insurance Options</a>
+              <a href={lp(contactHref, lang)} class="btn btn-gold">{copy.join}</a>
+              <a href={lp("/insurance", lang)} class="btn btn-outline-light">{copy.ins}</a>
             </div>
           </div>
         </div>

@@ -333,3 +333,10 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ],
   },
 };
+
+import type { Lang } from "../i18n";
+import { serviceDetailsEs } from "./serviceDetails.es";
+
+/** Page content for a service in the given language (falls back to English). */
+export const getServiceDetail = (slug: string, lang: Lang): ServiceDetail =>
+  (lang === "es" ? serviceDetailsEs[slug] : undefined) ?? serviceDetails[slug];

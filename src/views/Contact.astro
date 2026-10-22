@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedServices } from "../data/services";
+import { getLang } from "../i18n";
+import PageHero from "../components/ui/PageHero.astro";
+import VisitBar from "../components/ui/VisitBar.astro";
+import Locations from "../components/sections/Locations.astro";
+import Reveal from "../islands/Reveal";
+import ContactForm from "../islands/ContactForm";
+
+const lang = getLang(Astro);
+const services = localizedServices(lang);
+const copy = {
+  en: {
+    title: "Contact Us | Yes Dental",
+    description: "Request an appointment at Yes Dental in Manhattan. Call (212) 781-0700, email info@yesdental.com or visit us at 617 West 181st Street.",
+    eyebrow: "Contact Us",
+    h1: "Let us take care of your",
+    accent: "smile.",
+    intro: "Request an appointment, ask about insurance or membership, or simply say hello. Our friendly team is happy to help.",
+    nextEyebrow: "What happens next",
+    nextTitle: "Simple, friendly, no pressure.",
+    step: "Step",
+    emergency: "In a dental emergency, please call us right away. For a medical emergency, call 911.",
+    next: [
+      { title: "We receive your request", text: "Send the form or call us. Your details go straight to our team." },
+      { title: "We contact you", text: "We call or email to find a time that suits you and to confirm your visit." },
+      { title: "Your visit", text: "Bring your insurance card if you have one. We will explain every step and cost before treatment." },
+    ],
+  },
+  es: {
+    title: "Contacto | Yes Dental",
+    description: "Solicite una cita en Yes Dental, en Manhattan. Llame al (212) 781-0700, escriba a info@yesdental.com o visítenos en 617 West 181st Street.",
+    eyebrow: "Contacto",
+    h1: "Permítanos cuidar su",
+    accent: "sonrisa.",
+    intro: "Solicite una cita, pregunte por seguros o membresías, o simplemente salúdenos. Nuestro amable equipo con gusto le ayudará.",
+    nextEyebrow: "Qué sigue",
+    nextTitle: "Simple, amable y sin presión.",
+    step: "Paso",
+    emergency: "En una emergencia dental, llámenos de inmediato. En una emergencia médica, llame al 911.",
+    next: [
+      { title: "Recibimos su solicitud", text: "Envíe el formulario o llámenos. Sus datos llegan directo a nuestro equipo." },
+      { title: "Nos comunicamos con usted", text: "Le llamamos o escribimos para encontrar un horario que le convenga y confirmar su visita." },
+      { title: "Su visita", text: "Traiga su tarjeta de seguro si tiene una. Le explicaremos cada paso y cada costo antes del tratamiento." },
+    ],
+  },
+}[lang];
+const next = copy.next;
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <PageHero
+    eyebrow={copy.eyebrow}
+    title={copy.h1}
+    accent={copy.accent}
+    intro={copy.intro}
+  >
+    <VisitBar class="mt-12" />
+  </PageHero>
+
+  <section id="appointment" class="section-y bg-sand">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-7">
+        <ContactForm client:load lang={lang} services={services.map((s) => s.title)} />
+      </div>
+
+      <aside class="lg:col-span-5">
+        <Reveal client:visible className="lg:sticky lg:top-28 lg:self-start">
+          <p class="eyebrow text-gold-deep">{copy.nextEyebrow}</p>
+          <h2 class="h-display mt-4 !text-[clamp(2.2rem,4vw,3.2rem)]">{copy.nextTitle}</h2>
+          <span class="mt-7 block h-px w-16 bg-crimson"></span>
+          <ol class="mt-8 space-y-5">
+            {
+              next.map((s, i) => (
+                <li class="flex gap-5 rounded-2xl bg-white p-6">
+                  <span class="font-display text-4xl leading-none text-gold-deep" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 class="text-2xl text-ink"><span class="sr-only">{copy.step} {i + 1}: </span>{s.title}</h3>
+                    <p class="mt-1 text-mute">{s.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="mt-6 text-sm text-mute">{copy.emergency}</p>
+        </Reveal>
+      </aside>
+    </div>
+  </section>
+
+  <Locations tone="ivory" />
+</BaseLayout>

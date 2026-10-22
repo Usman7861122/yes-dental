@@ -2,13 +2,41 @@
 import Reveal from "../../islands/Reveal";
 import Icon from "../ui/Icon.astro";
 import Button from "../ui/Button.astro";
+import { getLang, lp } from "../../i18n";
 
-const { cta = { label: "Learn More About Us", href: "/about" } } = Astro.props;
-const points = [
-  "Experienced doctors and specialists in one practice",
-  "Gentle, patient-first care for every age",
-  "Conveniently located at 617 West 181st Street, Manhattan",
-];
+const lang = getLang(Astro);
+const copy = {
+  en: {
+    cta: "Learn More About Us",
+    points: [
+      "Experienced doctors and specialists in one practice",
+      "Gentle, patient-first care for every age",
+      "Conveniently located at 617 West 181st Street, Manhattan",
+    ],
+    alt1: "A dentist speaking with a patient in a bright, modern treatment room",
+    alt2: "Modern dental treatment room with natural light",
+    eyebrow: "About us",
+    title: "Dentistry that feels as good as it looks.",
+    p1: "At Yes Dental we care for families across Manhattan. We combine the skill of experienced specialists with a calm, welcoming space, so that every visit feels comfortable and every result looks natural.",
+    p2: "From a simple cleaning to a complete smile makeover, we plan your care with you, explain every step in plain words, and never rush.",
+  },
+  es: {
+    cta: "Conozca más sobre nosotros",
+    points: [
+      "Doctores y especialistas con experiencia en una sola clínica",
+      "Atención amable y centrada en el paciente, para todas las edades",
+      "Ubicados en 617 West 181st Street, Manhattan",
+    ],
+    alt1: "Un dentista conversando con un paciente en una sala de tratamiento luminosa y moderna",
+    alt2: "Sala moderna de tratamiento dental con luz natural",
+    eyebrow: "Sobre nosotros",
+    title: "Una odontología que se siente tan bien como se ve.",
+    p1: "En Yes Dental atendemos a familias de todo Manhattan. Unimos la experiencia de especialistas con un espacio tranquilo y acogedor, para que cada visita sea cómoda y cada resultado se vea natural.",
+    p2: "Desde una limpieza sencilla hasta una transformación completa de su sonrisa, planificamos su cuidado junto con usted, le explicamos cada paso con palabras claras y nunca lo apuramos.",
+  },
+}[lang];
+const { cta = { label: copy.cta, href: lp("/about", lang) } } = Astro.props;
+const points = copy.points;
 ---
 
 <section id="about" class="section-y overflow-hidden bg-ivory">
@@ -19,7 +47,7 @@ const points = [
           <span class="absolute -left-4 -top-4 hidden h-full w-full rounded-t-[999px] border border-gold sm:block" aria-hidden="true"></span>
           <img
             src="/images/about-consult.jpg"
-            alt="A dentist speaking with a patient in a bright, modern treatment room"
+            alt={copy.alt1}
             width="1400"
             height="1050"
             loading="lazy"
@@ -28,7 +56,7 @@ const points = [
         </div>
         <img
           src="/images/clinic-modern.jpg"
-          alt="Modern dental treatment room with natural light"
+          alt={copy.alt2}
           width="1600"
           height="1070"
           loading="lazy"
@@ -39,20 +67,17 @@ const points = [
 
     <div>
       <Reveal client:visible>
-        <p class="eyebrow text-gold-deep">About us</p>
-        <h2 class="h-display mt-4">Dentistry that feels as good as it looks.</h2>
+        <p class="eyebrow text-gold-deep">{copy.eyebrow}</p>
+        <h2 class="h-display mt-4">{copy.title}</h2>
         <span class="mt-7 block h-px w-16 bg-crimson"></span>
       </Reveal>
 
       <Reveal client:visible delay={0.1}>
         <p class="mt-8 text-lg text-mute">
-          At Yes Dental we care for families across Manhattan. We
-          combine the skill of experienced specialists with a calm, welcoming space, so that every visit feels
-          comfortable and every result looks natural.
+          {copy.p1}
         </p>
         <p class="mt-5 text-lg text-mute">
-          From a simple cleaning to a complete smile makeover, we plan your care with you, explain every step in
-          plain words, and never rush.
+          {copy.p2}
         </p>
 
         <ul class="mt-8 space-y-4">

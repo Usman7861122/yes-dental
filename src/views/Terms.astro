@@ -1,0 +1,117 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site, fullAddress } from "../data/site";
+import { getLang } from "../i18n";
+
+const lang = getLang(Astro);
+---
+
+<LegalLayout
+  title={lang === "es" ? "Términos y condiciones" : "Terms & Conditions"}
+  description={lang === "es" ? "Los términos para usar el sitio web de Yes Dental." : "The terms for using the Yes Dental website."}
+  updated={lang === "es" ? "7 de octubre de 2026" : "October 7, 2026"}
+>
+  {
+    lang === "es" ? (
+      <>
+  <p>
+    Bienvenido al sitio web de {site.name}. Al usar este sitio web, usted acepta estos términos. Si no está de acuerdo, por favor no use el sitio.
+  </p>
+
+  <h2>Solo información general</h2>
+  <p>El contenido de este sitio web es información general. No es asesoría médica ni dental y no reemplaza un examen ni el consejo de un dentista calificado. Solo un dentista que lo haya examinado puede recomendarle el tratamiento adecuado. Las descripciones de los tratamientos, los resultados y los plazos varían de una persona a otra.</p>
+
+  <h2>No se crea una relación dentista-paciente</h2>
+  <p>Usar este sitio web, enviar un formulario o escribirnos un correo no crea una relación dentista-paciente. Esa relación comienza solo cuando usted es examinado y aceptado como paciente en nuestro consultorio. En una emergencia, llame al 911 o acuda a la sala de emergencias más cercana.</p>
+
+  <h2>Solicitudes de cita</h2>
+  <p>Una solicitud de cita no es una reserva confirmada. Nos comunicaremos con usted para confirmar la fecha y la hora. Llámenos si necesita cambiar o cancelar una cita.</p>
+
+  <h2>Seguros, tarifas y ofertas</h2>
+  <p>La información sobre los planes de seguro aceptados, los ahorros de la membresía o el financiamiento es una guía general y puede cambiar. La cobertura depende de su plan individual, por lo que le pedimos que se comunique con nosotros para confirmar los detalles antes del tratamiento. Cualquier tarifa se le explicará antes de comenzar el tratamiento.</p>
+
+  <h2>Uso del sitio web</h2>
+  <p>Usted se compromete a no hacer un mal uso del sitio web, lo que incluye intentar obtener acceso no autorizado, interferir con su funcionamiento, enviar código dañino o usarlo con fines ilegales. La información que nos envíe a través del sitio web debe ser exacta y debe ser suya o enviarse con permiso.</p>
+
+  <h2>Propiedad intelectual</h2>
+  <p>El texto, los logotipos, el diseño y otros materiales de este sitio web pertenecen a {site.name} o a sus licenciantes y están protegidos por la ley. Algunas fotografías de este sitio son proporcionadas por colaboradores de Unsplash bajo la licencia de Unsplash. Usted puede ver e imprimir las páginas para su uso personal. No puede copiar, reproducir ni reutilizar nuestro contenido con fines comerciales sin nuestro permiso por escrito.</p>
+
+  <h2>Enlaces a otros sitios web</h2>
+  <p>Este sitio web puede enlazar a otros sitios web, incluido MyFirstDENTISTNY.com, que son operados por otras organizaciones. No los controlamos y no somos responsables de su contenido ni de sus prácticas.</p>
+
+  <h2>Descargo de responsabilidad</h2>
+  <p>Nos esforzamos por mantener el sitio web exacto y actualizado, pero no prometemos que siempre esté completo, al día o libre de errores, ni que siempre esté disponible. El sitio web se ofrece "tal cual".</p>
+
+  <h2>Limitación de responsabilidad</h2>
+  <p>En la máxima medida permitida por la ley, {site.name} no es responsable de ninguna pérdida o daño que resulte del uso o la imposibilidad de uso de este sitio web, ni de confiar en su contenido. Nada en estos términos limita una responsabilidad que la ley no permita limitar.</p>
+
+  <h2>Privacidad</h2>
+  <p>Lea nuestra <a href="/es/privacy-policy">Política de privacidad</a> para saber cómo manejamos su información.</p>
+
+  <h2>Ley aplicable</h2>
+  <p>Estos términos se rigen por las leyes del Estado de Nueva York, y cualquier disputa se resolverá en los tribunales ubicados en el condado de Nueva York, Nueva York.</p>
+
+  <h2>Cambios a estos términos</h2>
+  <p>Podemos cambiar estos términos de vez en cuando. La fecha en la parte superior de la página indica cuándo se actualizaron por última vez. Si sigue usando el sitio web después de un cambio, significa que acepta los nuevos términos.</p>
+
+  <h2>Contáctenos</h2>
+  <p>
+    {site.name}<br />
+    {fullAddress}<br />
+    Teléfono: <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a><br />
+    Correo: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+</>
+    ) : (
+      <>
+  <p>
+    Welcome to the {site.name} website. By using this website you agree to these terms. If you do not agree, please do not use the site.
+  </p>
+
+  <h2>General information only</h2>
+  <p>The content on this website is for general information. It is not medical or dental advice and does not replace an examination or advice from a qualified dentist. Only a dentist who has examined you can recommend the right treatment for you. Treatment descriptions, results and timelines vary from person to person.</p>
+
+  <h2>No dentist–patient relationship</h2>
+  <p>Using this website, sending a form or emailing us does not create a dentist–patient relationship. That relationship begins only when you are examined and accepted as a patient at our office. In an emergency, call 911 or go to your nearest emergency room.</p>
+
+  <h2>Appointment requests</h2>
+  <p>An appointment request is not a confirmed booking. We will contact you to confirm a date and time. Please call us if you need to change or cancel an appointment.</p>
+
+  <h2>Insurance, fees and offers</h2>
+  <p>Information about accepted insurance plans, membership savings or financing is a general guide and may change. Coverage depends on your individual plan, so please contact us to confirm details before treatment. Any fee will be explained to you before treatment begins.</p>
+
+  <h2>Using the website</h2>
+  <p>You agree not to misuse the website, including trying to gain unauthorized access, interfering with its operation, sending harmful code, or using it for unlawful purposes. Information you send us through the website should be accurate and should be your own or sent with permission.</p>
+
+  <h2>Intellectual property</h2>
+  <p>The text, logos, design and other materials on this website belong to {site.name} or its licensors and are protected by law. Some photographs on this site are provided by Unsplash contributors under the Unsplash license. You may view and print pages for your personal use. You may not copy, reproduce or reuse our content for commercial purposes without our written permission.</p>
+
+  <h2>Links to other websites</h2>
+  <p>This website may link to other websites, including MyFirstDENTISTNY.com, which are run by other organizations. We do not control them and are not responsible for their content or practices.</p>
+
+  <h2>Disclaimer</h2>
+  <p>We try to keep the website accurate and up to date, but we do not promise that it is always complete, current or free of errors, or that it will always be available. The website is provided "as is".</p>
+
+  <h2>Limitation of liability</h2>
+  <p>To the fullest extent allowed by law, {site.name} is not liable for any loss or damage that results from your use of, or inability to use, this website or from relying on its content. Nothing in these terms limits any liability that cannot be limited by law.</p>
+
+  <h2>Privacy</h2>
+  <p>Please read our <a href="/privacy-policy">Privacy Policy</a> to learn how we handle your information.</p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of the State of New York, and any dispute will be handled in the courts located in New York County, New York.</p>
+
+  <h2>Changes to these terms</h2>
+  <p>We may change these terms from time to time. The date at the top of the page shows when they were last updated. Continuing to use the website after a change means you accept the new terms.</p>
+
+  <h2>Contact us</h2>
+  <p>
+    {site.name}<br />
+    {fullAddress}<br />
+    Phone: <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a><br />
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+</>
+    )
+  }
+</LegalLayout>

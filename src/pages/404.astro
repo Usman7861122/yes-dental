@@ -1,12 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/ui/Button.astro";
+import { getLang, lp } from "../i18n";
+
+// Astro serves one 404 page. The language comes from the URL when the host passes it (e.g. /es/...).
+const lang = getLang(Astro);
+const copy = {
+  en: { title: "Page not found | Yes Dental", code: "Error 404", h1: "This page could not be found.", back: "Back to Home" },
+  es: { title: "Página no encontrada | Yes Dental", code: "Error 404", h1: "No se pudo encontrar esta página.", back: "Volver al inicio" },
+}[lang];
 ---
 
-<BaseLayout title="Page not found | Yes Dental">
+<BaseLayout title={copy.title}>
   <section class="section-y container-x text-center">
-    <p class="eyebrow text-gold-deep">Error 404</p>
-    <h1 class="h-display mt-4">This page could not be found.</h1>
-    <div class="mt-10"><Button href="/" variant="ink">Back to Home</Button></div>
+    <p class="eyebrow text-gold-deep">{copy.code}</p>
+    <h1 class="h-display mt-4">{copy.h1}</h1>
+    <div class="mt-10"><Button href={lp("/", lang)} variant="ink">{copy.back}</Button></div>
   </section>
 </BaseLayout>

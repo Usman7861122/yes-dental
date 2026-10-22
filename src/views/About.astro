@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, contactHref } from "../data/site";
+import { getLang, lp } from "../i18n";
+import { useUi } from "../i18n/ui";
+import PageHero from "../components/ui/PageHero.astro";
+import About from "../components/sections/About.astro";
+import WhyChooseUs from "../components/sections/WhyChooseUs.astro";
+import KidsParallax from "../components/sections/KidsParallax.astro";
+import Locations from "../components/sections/Locations.astro";
+import Reveal from "../islands/Reveal";
+import Icon from "../components/ui/Icon.astro";
+import Button from "../components/ui/Button.astro";
+
+const lang = getLang(Astro);
+const t = useUi(lang);
+const copy = {
+  en: {
+    title: "About Us | Yes Dental",
+    description: "Meet Yes Dental in Manhattan: an experienced team providing personalized, complete dentistry for the whole family.",
+    eyebrow: "About",
+    h1: "About",
+    accent: "Yes Dental.",
+    intro: "An experienced team, a calm and welcoming office, and complete dentistry for every member of your family.",
+    promises: [
+      { icon: "shield-check", title: "Experienced Team", text: "Skilled dental professionals providing personalized care for every patient." },
+      { icon: "tooth", title: "Complete Dentistry", text: "Comprehensive treatments designed to support healthy, confident smiles." },
+    ],
+    ctaA: "Come and",
+    ctaAccent: "meet us.",
+  },
+  es: {
+    title: "Nosotros | Yes Dental",
+    description: "Conozca Yes Dental en Manhattan: un equipo con experiencia que ofrece odontología personalizada y completa para toda la familia.",
+    eyebrow: "Nosotros",
+    h1: "Sobre",
+    accent: "Yes Dental.",
+    intro: "Un equipo con experiencia, un consultorio tranquilo y acogedor, y odontología completa para cada miembro de su familia.",
+    promises: [
+      { icon: "shield-check", title: "Equipo con experiencia", text: "Profesionales dentales capacitados que brindan atención personalizada a cada paciente." },
+      { icon: "tooth", title: "Odontología completa", text: "Tratamientos integrales para lograr sonrisas sanas y seguras." },
+    ],
+    ctaA: "Venga y",
+    ctaAccent: "conózcanos.",
+  },
+}[lang];
+const promises = copy.promises;
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <PageHero
+    eyebrow={copy.eyebrow}
+    title={copy.h1}
+    accent={copy.accent}
+    intro={copy.intro}
+  />
+
+  <About cta={{ label: t.requestAppointment, href: lp(contactHref, lang) }} />
+
+  <section class="bg-sand py-20 lg:py-24">
+    <div class="container-x">
+      <ul class="grid gap-6 md:grid-cols-2">
+        {
+          promises.map((p, i) => (
+            <li>
+              <Reveal client:visible delay={i * 0.08} className="h-full">
+                <div class="h-full rounded-2xl bg-white p-9 shadow-[0_20px_50px_-35px_rgba(14,26,58,0.5)]">
+                  <span class="flex h-14 w-14 items-center justify-center rounded-full bg-ink text-gold"><Icon name={p.icon} size={26} /></span>
+                  <h2 class="mt-6 text-4xl text-ink">{p.title}</h2>
+                  <p class="mt-3 text-lg text-mute">{p.text}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <WhyChooseUs />
+  <KidsParallax />
+  <Locations tone="ivory" />
+
+  <section class="on-dark bg-ink py-20 text-ivory lg:py-24">
+    <div class="container-x flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+      <div>
+        <h2 class="h-display max-w-2xl">{copy.ctaA} <em class="font-medium italic text-crimson-light">{copy.ctaAccent}</em></h2>
+        <p class="mt-5 text-lg text-mist">{site.address.street}, {site.address.city} · {site.phone.display}</p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <Button href={lp(contactHref, lang)} variant="gold">{t.requestAppointment}</Button>
+        <Button href={`tel:${site.phone.tel}`} variant="outline-light">{t.call} {site.phone.display}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

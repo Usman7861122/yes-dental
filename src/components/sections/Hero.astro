@@ -1,18 +1,46 @@
 ---
 import HeroImage from "../../islands/HeroImage";
 import Icon from "../ui/Icon.astro";
+import { getLang, lp } from "../../i18n";
+import { contactHref } from "../../data/site";
+
+const lang = getLang(Astro);
+const copy = {
+  en: {
+    eyebrow: "Manhattan · New York City",
+    title: "The art of a",
+    accent: "confident",
+    titleEnd: "smile.",
+    text: "Skilled dental professionals providing personalized care for every patient. Comprehensive treatments designed to support healthy, confident smiles.",
+    cta: "Request Appointment",
+    explore: "Explore Services",
+    alt: "A woman laughing, showing a bright, healthy smile",
+    facts: ["Dental services under one roof", "Savings with our membership", "Insurance plans accepted"],
+  },
+  es: {
+    eyebrow: "Manhattan · Nueva York",
+    title: "El arte de una sonrisa",
+    accent: "segura",
+    titleEnd: "",
+    text: "Profesionales dentales con experiencia que brindan atención personalizada a cada paciente. Tratamientos completos para lograr sonrisas sanas y seguras.",
+    cta: "Solicitar cita",
+    explore: "Ver servicios",
+    alt: "Una mujer riendo que muestra una sonrisa brillante y sana",
+    facts: ["Servicios dentales bajo un mismo techo", "Ahorro con nuestra membresía", "Planes de seguro aceptados"],
+  },
+}[lang];
 
 const facts = [
-  { big: "10", small: "Dental services under one roof" },
-  { big: "50%+", small: "Savings with our membership" },
-  { big: "14+", small: "Insurance plans accepted" },
+  { big: "10", small: copy.facts[0] },
+  { big: "50%+", small: copy.facts[1] },
+  { big: "14+", small: copy.facts[2] },
 ];
 ---
 
 <section class="on-dark relative isolate flex min-h-[calc(100svh-4.75rem)] flex-col overflow-hidden bg-ink text-ivory">
   <!-- Photo + overlays -->
   <div class="absolute inset-0 -z-10">
-    <HeroImage client:load src="/images/hero-smile.jpg" alt="A woman laughing, showing a bright, healthy smile" width={1800} height={1200} />
+    <HeroImage client:load src="/images/hero-smile.jpg" alt={copy.alt} width={1800} height={1200} />
     <div class="absolute inset-0 bg-ink/65 lg:hidden"></div>
     <div class="absolute inset-0 hidden bg-[linear-gradient(90deg,#0e1a3a_0%,#0e1a3a_34%,rgba(14,26,58,0.6)_58%,rgba(14,26,58,0.1)_100%)] lg:block"></div>
     <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent"></div>
@@ -20,20 +48,19 @@ const facts = [
 
   <div class="container-x flex flex-1 items-center py-20 lg:py-24">
     <div class="max-w-3xl">
-      <p class="eyebrow rise text-gold" style="--d:0.1s">Manhattan · New York City</p>
+      <p class="eyebrow rise text-gold" style="--d:0.1s">{copy.eyebrow}</p>
       <h1 class="h-hero rise mt-6" style="--d:0.25s">
-        The art of a <em class="font-medium italic text-crimson-light">confident</em> smile.
+        {copy.title} <em class="font-medium italic text-crimson-light">{copy.accent}</em>{copy.titleEnd && ` ${copy.titleEnd}`}
       </h1>
       <p class="rise mt-8 max-w-xl text-lg text-mist sm:text-xl" style="--d:0.45s">
-        Skilled dental professionals providing personalized care for every patient. Comprehensive treatments designed
-        to support healthy, confident smiles.
+        {copy.text}
       </p>
       <div class="rise mt-10 flex flex-col gap-4 sm:flex-row" style="--d:0.6s">
-        <a href="/contact-us" class="btn btn-gold">
-          Request Appointment
+        <a href={lp(contactHref, lang)} class="btn btn-gold">
+          {copy.cta}
           <Icon name="arrow-right" size={18} />
         </a>
-        <a href="/#services" class="btn btn-outline-light">Explore Services</a>
+        <a href={lp("/#services", lang)} class="btn btn-outline-light">{copy.explore}</a>
       </div>
     </div>
   </div>

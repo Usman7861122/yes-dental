@@ -1,7 +1,10 @@
 ---
 import { site, mapsUrl } from "../../data/site";
 import Icon from "./Icon.astro";
+import { getLang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
 const { class: cls = "" } = Astro.props;
+const t = useUi(getLang(Astro));
 ---
 
 <!-- Where to find us: address, phone, email, directions -->
@@ -9,15 +12,15 @@ const { class: cls = "" } = Astro.props;
   <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="flex items-start gap-4 bg-ink-soft/90 p-6 transition-colors hover:bg-ink-soft sm:col-span-2 lg:col-span-1">
     <span class="mt-0.5 text-gold"><Icon name="map-pin" size={22} /></span>
     <span>
-      <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">Visit us</span>
+      <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">{t.visitUs}</span>
       <span class="mt-1 block text-ivory">{site.address.street}<br />{site.address.city}</span>
-      <span class="sr-only"> (opens in a new tab)</span>
+      <span class="sr-only"> {t.newTab}</span>
     </span>
   </a>
   <a href={`tel:${site.phone.tel}`} class="flex items-start gap-4 bg-ink-soft/90 p-6 transition-colors hover:bg-ink-soft">
     <span class="mt-0.5 text-gold"><Icon name="phone" size={22} /></span>
     <span>
-      <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">Call</span>
+      <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">{t.call}</span>
       <span class="mt-1 block text-ivory">{site.phone.display}</span>
     </span>
   </a>
@@ -26,13 +29,13 @@ const { class: cls = "" } = Astro.props;
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
     </span>
     <span class="min-w-0">
-      <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">Email</span>
+      <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">{t.email}</span>
       <span class="mt-1 block break-all text-ivory">{site.email}</span>
     </span>
   </a>
   <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="flex items-center justify-between gap-4 bg-ink-soft/90 p-6 font-semibold text-gold transition-colors hover:bg-ink-soft">
-    Get directions
+    {t.getDirections}
     <Icon name="arrow-up-right" size={20} />
-    <span class="sr-only"> (opens in a new tab)</span>
+    <span class="sr-only"> {t.newTab}</span>
   </a>
 </div>

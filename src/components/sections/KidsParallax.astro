@@ -2,6 +2,15 @@
 import { site } from "../../data/site";
 import Reveal from "../../islands/Reveal";
 import Icon from "../ui/Icon.astro";
+import { getLang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
+
+const lang = getLang(Astro);
+const t = useUi(lang);
+const copy = {
+  en: { eyebrow: "Our family of care", title: "Pediatric specialists affiliated with our group", big: "KIDS DENTAL", sub: "operating out of 3 locations in NYC", visit: "Please visit" },
+  es: { eyebrow: "Nuestra familia de cuidado", title: "Especialistas pediátricos afiliados a nuestro grupo", big: "DENTISTA PARA NIÑOS", sub: "con 3 ubicaciones en la ciudad de Nueva York", visit: "Visite" },
+}[lang];
 ---
 
 <section
@@ -14,20 +23,20 @@ import Icon from "../ui/Icon.astro";
 
   <div class="container-x">
     <Reveal client:visible>
-      <p class="eyebrow text-gold">Our family of care</p>
+      <p class="eyebrow text-gold">{copy.eyebrow}</p>
       <h2 id="kids-title" class="h-display mx-auto mt-5 max-w-3xl">
-        Pediatric specialists affiliated with our group
+        {copy.title}
       </h2>
       <p class="mt-10 font-display text-6xl font-semibold tracking-[0.08em] text-gold sm:text-8xl lg:text-9xl">
-        KIDS DENTAL
+        {copy.big}
       </p>
-      <p class="mt-4 text-xl text-ivory sm:text-2xl">operating out of 3 locations in NYC</p>
-      <p class="mx-auto mt-8 max-w-md text-mist">Please visit</p>
+      <p class="mt-4 text-xl text-ivory sm:text-2xl">{copy.sub}</p>
+      <p class="mx-auto mt-8 max-w-md text-mist">{copy.visit}</p>
       <div class="mt-4">
         <a href={site.kids.url} target="_blank" rel="noopener noreferrer" class="btn btn-gold">
           {site.kids.name}
           <Icon name="arrow-up-right" size={18} />
-          <span class="sr-only">(opens in a new tab)</span>
+          <span class="sr-only">{t.newTab}</span>
         </a>
       </div>
     </Reveal>

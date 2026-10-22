@@ -2,7 +2,15 @@
 import { site, mapsUrl, mapEmbedUrl } from "../../data/site";
 import Reveal from "../../islands/Reveal";
 import Icon from "../ui/Icon.astro";
+import { getLang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
 const { tone = "sand" } = Astro.props;
+const lang = getLang(Astro);
+const t = useUi(lang);
+const copy = {
+  en: { eyebrow: "Visit us", a: "Find us in", accent: "Manhattan.", side: "Easy to reach, with a warm welcome waiting for you.", map: (n: string, a: string) => `Map showing ${n} at ${a}` },
+  es: { eyebrow: "Visítenos", a: "Encuéntrenos en", accent: "Manhattan.", side: "Fácil de llegar, con una cálida bienvenida que le espera.", map: (n: string, a: string) => `Mapa que muestra ${n} en ${a}` },
+}[lang];
 ---
 
 <section id="locations" class:list={["section-y", tone === "sand" ? "bg-sand" : "bg-ivory"]}>
@@ -10,12 +18,12 @@ const { tone = "sand" } = Astro.props;
     <Reveal client:visible>
       <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div class="max-w-2xl">
-          <p class="eyebrow text-gold-deep">Visit us</p>
+          <p class="eyebrow text-gold-deep">{copy.eyebrow}</p>
           <h2 class="h-display mt-4">
-            Find us in <em class="font-medium italic text-crimson">Manhattan.</em>
+            {copy.a} <em class="font-medium italic text-crimson">{copy.accent}</em>
           </h2>
         </div>
-        <p class="max-w-sm text-mute">Easy to reach, with a warm welcome waiting for you.</p>
+        <p class="max-w-sm text-mute">{copy.side}</p>
       </div>
     </Reveal>
 
@@ -23,7 +31,7 @@ const { tone = "sand" } = Astro.props;
       <div class="rounded-[1.75rem] bg-white p-3 shadow-[0_30px_60px_-40px_rgba(14,26,58,0.45)] sm:p-6">
         <div class="overflow-hidden rounded-2xl bg-sand">
           <iframe
-            title={`Map showing ${site.name} at ${site.address.street}, ${site.address.city}`}
+            title={copy.map(site.name, `${site.address.street}, ${site.address.city}`)}
             src={mapEmbedUrl}
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -51,8 +59,8 @@ const { tone = "sand" } = Astro.props;
                 {site.phone.display}
               </a>
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-gold !min-h-11 !px-6">
-                Get directions
-                <span class="sr-only"> (opens in a new tab)</span>
+                {t.getDirections}
+                <span class="sr-only"> {t.newTab}</span>
               </a>
             </div>
           </div>

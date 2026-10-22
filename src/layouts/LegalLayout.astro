@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { getLang, lp } from "../i18n";
+import { useUi } from "../i18n/ui";
 
 interface Props {
   title: string;
@@ -7,18 +9,21 @@ interface Props {
   updated: string;
 }
 const { title, description, updated } = Astro.props;
+const lang = getLang(Astro);
+const t = useUi(lang);
+const updatedLabel = lang === "es" ? "Última actualización" : "Last updated";
 ---
 
 <BaseLayout title={`${title} | Yes Dental`} description={description}>
   <section class="on-dark bg-ink pb-16 pt-16 text-ivory lg:pb-20 lg:pt-24">
     <div class="container-x">
-      <nav aria-label="Breadcrumb" class="text-sm text-mist">
-        <a href="/" class="inline-flex min-h-8 items-center hover:text-ivory">Home</a>
+      <nav aria-label={t.breadcrumb} class="text-sm text-mist">
+        <a href={lp("/", lang)} class="inline-flex min-h-8 items-center hover:text-ivory">{t.home}</a>
         <span aria-hidden="true" class="mx-2">/</span>
         <span aria-current="page" class="text-ivory">{title}</span>
       </nav>
       <h1 class="h-display mt-8 max-w-3xl">{title}</h1>
-      <p class="mt-5 text-mist">Last updated: {updated}</p>
+      <p class="mt-5 text-mist">{updatedLabel}: {updated}</p>
     </div>
   </section>
   <section class="section-y bg-ivory !pt-14 lg:!pt-20">

@@ -1,6 +1,8 @@
 ---
 import Icon from "./Icon.astro";
 import type { Service } from "../../data/services";
+import { getLang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
 
 interface Props {
   service: Service;
@@ -11,6 +13,7 @@ interface Props {
   tall?: boolean;
 }
 const { service: s, href, cta, index, external = false, tall = false } = Astro.props;
+const t = useUi(getLang(Astro));
 ---
 
 <a
@@ -44,7 +47,7 @@ const { service: s, href, cta, index, external = false, tall = false } = Astro.p
   <p class="mt-4 max-w-xl text-mist">{s.summary}</p>
   <span class="mt-6 inline-flex items-center gap-2 text-[0.9rem] font-semibold text-gold">
     {cta}
-    {external && <span class="sr-only"> (opens in a new tab)</span>}
+    {external && <span class="sr-only"> {t.newTab}</span>}
     <Icon name={external ? "arrow-up-right" : "arrow-right"} size={18} class="transition-transform duration-300 group-hover:translate-x-1.5" />
   </span>
 </a>

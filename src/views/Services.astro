@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedServices, serviceHrefFor } from "../data/services";
+import { contactHref } from "../data/site";
+import { getLang, lp } from "../i18n";
+import { useUi } from "../i18n/ui";
+import Reveal from "../islands/Reveal";
+import ServiceCard from "../components/ui/ServiceCard.astro";
+import Button from "../components/ui/Button.astro";
+
+const lang = getLang(Astro);
+const t = useUi(lang);
+const services = localizedServices(lang);
+const copy = {
+  en: {
+    title: "Our Services | Yes Dental",
+    description: "Dental implants, dentures, crowns, orthodontics, root canals, veneers and more at Yes Dental in Manhattan.",
+    eyebrow: "Our services",
+    h1a: "Every kind of care,",
+    accent: "beautifully",
+    h1b: "done.",
+    intro: "Ten services, one trusted team. Choose a service to learn more, or request an appointment and we will guide you.",
+  },
+  es: {
+    title: "Nuestros servicios | Yes Dental",
+    description: "Implantes dentales, dentaduras, coronas, ortodoncia, tratamientos de conducto, carillas y más en Yes Dental, en Manhattan.",
+    eyebrow: "Nuestros servicios",
+    h1a: "Todo tipo de cuidado,",
+    accent: "con belleza",
+    h1b: "y esmero.",
+    intro: "Diez servicios, un equipo de confianza. Elija un servicio para saber más, o solicite una cita y le guiaremos.",
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <section class="on-dark bg-ink pb-20 pt-20 text-ivory lg:pb-28 lg:pt-28">
+    <div class="container-x">
+      <p class="eyebrow text-gold">{copy.eyebrow}</p>
+      <h1 class="h-hero mt-5 max-w-4xl">{copy.h1a} <em class="font-medium italic text-gold">{copy.accent}</em> {copy.h1b}</h1>
+      <p class="mt-8 max-w-xl text-lg text-mist">
+        {copy.intro}
+      </p>
+    </div>
+  </section>
+
+  <section class="section-y bg-ivory">
+    <div class="container-x grid gap-6 lg:grid-cols-2">
+      {
+        services.map((s, i) => (
+          <Reveal client:visible delay={(i % 2) * 0.08} className="h-full">
+            <ServiceCard service={s} index={i} tall href={serviceHrefFor(s, lang)} cta={t.learnMore} />
+          </Reveal>
+        ))
+      }
+    </div>
+    <div class="mt-16 text-center">
+      <Button href={lp(contactHref, lang)} variant="gold">{t.requestAppointment}</Button>
+    </div>
+  </section>
+</BaseLayout>

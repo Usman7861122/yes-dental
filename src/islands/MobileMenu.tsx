@@ -3,10 +3,11 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 
 type Child = { label: string; href: string; external?: boolean };
 type Item = { label: string; href?: string; children?: Child[]; viewAll?: { label: string; href: string } };
-type Props = { nav: Item[]; phone: string; tel: string; contactHref: string };
+type Labels = { menu: string; open: string; close: string; nav: string; dialog: string; call: string; request: string; switchLabel: string; switchAria: string; switchLang: string };
+type Props = { nav: Item[]; phone: string; tel: string; contactHref: string; lang: string; switchHref: string; labels: Labels };
 
 /** Full-screen mobile menu with an expandable Services list. Use with client:media="(max-width: 1279px)". */
-export default function MobileMenu({ nav, phone, tel, contactHref }: Props) {
+export default function MobileMenu({ nav, phone, tel, contactHref, switchHref, labels }: Props) {
   const [open, setOpen] = useState(false);
   const [sub, setSub] = useState<string | null>(null);
 
@@ -33,7 +34,7 @@ export default function MobileMenu({ nav, phone, tel, contactHref }: Props) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open menu"
+        aria-label={labels.open}
         aria-expanded={open}
         aria-controls="mobile-nav"
         className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-line text-ink transition active:scale-95 xl:hidden"
@@ -47,7 +48,7 @@ export default function MobileMenu({ nav, phone, tel, contactHref }: Props) {
             id="mobile-nav"
             role="dialog"
             aria-modal="true"
-            aria-label="Site menu"
+            aria-label={labels.dialog}
             className="on-dark fixed inset-0 z-50 flex flex-col overflow-y-auto bg-ink px-6 pb-10 pt-5 text-ivory"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -55,18 +56,18 @@ export default function MobileMenu({ nav, phone, tel, contactHref }: Props) {
             transition={{ duration: 0.3 }}
           >
             <div className="flex items-center justify-between">
-              <span className="font-display text-2xl">Menu</span>
+              <span className="font-display text-2xl">{labels.menu}</span>
               <button
                 type="button"
                 onClick={close}
-                aria-label="Close menu"
+                aria-label={labels.close}
                 className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition active:scale-95"
               >
                 <Icon close />
               </button>
             </div>
 
-            <nav aria-label="Mobile" className="mt-8 flex-1">
+            <nav aria-label={labels.nav} className="mt-8 flex-1">
               <ul>
                 {nav.map((item, i) => (
                   <motion.li
@@ -130,8 +131,11 @@ export default function MobileMenu({ nav, phone, tel, contactHref }: Props) {
             </nav>
 
             <div className="mt-8 flex flex-col gap-3">
-              <a href={`tel:${tel}`} className="btn btn-outline-light">Call {phone}</a>
-              <a href={contactHref} onClick={close} className="btn btn-gold">Request Appointment</a>
+              <a href={`tel:${tel}`} className="btn btn-outline-light">{labels.call} {phone}</a>
+              <a href={contactHref} onClick={close} className="btn btn-gold">{labels.request}</a>
+              <a href={switchHref} lang={labels.switchLang} hrefLang={labels.switchLang} aria-label={labels.switchAria} className="btn btn-outline-light">
+                {labels.switchLabel}
+              </a>
             </div>
           </motion.div>
         )}

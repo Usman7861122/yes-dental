@@ -1,16 +1,23 @@
 ---
-import { site, mapsUrl } from "../../data/site";
-import { services, serviceHref } from "../../data/services";
+import { site, siteCopy, navFor, mapsUrl } from "../../data/site";
+import { localizedServices, serviceHrefFor } from "../../data/services";
+import { lp, type Lang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const t = useUi(lang);
+const nav = navFor(lang);
+const featured = localizedServices(lang).filter((s) => s.featured);
 ---
 
 <footer class="on-dark bg-ink-deep text-mist">
   <div class="container-x py-16 lg:py-20">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <a href="/" aria-label={`${site.name} – home`} class="inline-block rounded-2xl bg-ivory px-5 py-3">
+        <a href={lp("/", lang)} aria-label={`${site.name} – ${t.homeAria}`} class="inline-block rounded-2xl bg-ivory px-5 py-3">
           <img src="/images/logo.png" alt={site.name} width="970" height="248" loading="lazy" class="h-11 w-auto" />
         </a>
-        <p class="mt-6 max-w-sm">{site.description}</p>
+        <p class="mt-6 max-w-sm">{siteCopy[lang].description}</p>
         {
           site.social.length > 0 && (
             <ul class="mt-6 flex gap-6">
@@ -26,11 +33,11 @@ import { services, serviceHref } from "../../data/services";
         }
       </div>
 
-      <nav aria-label="Footer" class="lg:col-span-2">
-        <h3 class="eyebrow text-gold">Explore</h3>
+      <nav aria-label={t.footerNav} class="lg:col-span-2">
+        <h3 class="eyebrow text-gold">{t.explore}</h3>
         <ul class="mt-5 space-y-1">
           {
-            site.nav.filter((i) => i.href).map((i) => (
+            nav.filter((i) => i.href).map((i) => (
               <li>
                 <a href={i.href} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{i.label}</a>
               </li>
@@ -40,25 +47,23 @@ import { services, serviceHref } from "../../data/services";
       </nav>
 
       <div class="lg:col-span-2">
-        <h3 class="eyebrow text-gold">Services</h3>
+        <h3 class="eyebrow text-gold">{t.services}</h3>
         <ul class="mt-5 space-y-1">
           {
-            services
-              .filter((s) => s.featured)
-              .map((s) => (
+            featured.map((s) => (
                 <li>
-                  <a href={serviceHref(s)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{s.title}</a>
+                  <a href={serviceHrefFor(s, lang)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{s.title}</a>
                 </li>
               ))
           }
           <li>
-            <a href="/services" class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">View all services</a>
+            <a href={lp("/services", lang)} class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">{t.viewAllServices}</a>
           </li>
         </ul>
       </div>
 
       <div class="lg:col-span-3">
-        <h3 class="eyebrow text-gold">Visit us</h3>
+        <h3 class="eyebrow text-gold">{t.visitUs}</h3>
         <address class="mt-5 not-italic leading-relaxed">
           <span class="font-semibold text-ivory">{site.name}</span><br />
           {site.address.street}<br />
@@ -69,7 +74,7 @@ import { services, serviceHref } from "../../data/services";
           <li><a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center break-all transition-colors hover:text-gold">{site.email}</a></li>
           <li>
             <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">
-              Get directions<span class="sr-only"> (opens in a new tab)</span>
+              {t.getDirections}<span class="sr-only"> {t.newTab}</span>
             </a>
           </li>
         </ul>
@@ -77,12 +82,12 @@ import { services, serviceHref } from "../../data/services";
     </div>
 
     <div class="mt-14 flex flex-col gap-3 border-t border-white/10 pt-8 text-sm sm:flex-row sm:items-center sm:justify-between">
-      <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} {site.name}. {t.rights}</p>
       <ul class="flex flex-wrap items-center gap-x-6">
-        <li><a href="/privacy-policy" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Privacy Policy</a></li>
-        <li><a href="/terms-and-conditions" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Terms &amp; Conditions</a></li>
-        <li><a href="/accessibility-policy" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Accessibility</a></li>
-        <li><button type="button" id="cookie-settings" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">Cookie settings</button></li>
+        <li><a href={lp("/privacy-policy", lang)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{t.privacy}</a></li>
+        <li><a href={lp("/terms-and-conditions", lang)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{t.terms}</a></li>
+        <li><a href={lp("/accessibility-policy", lang)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{t.accessibility}</a></li>
+        <li><button type="button" id="cookie-settings" class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{t.cookieSettings}</button></li>
       </ul>
     </div>
     <script is:inline>

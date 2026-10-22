@@ -2,6 +2,27 @@ import { useEffect, useState } from "react";
 
 const KEY = "yd-cookie-consent";
 
+const copy = {
+  en: {
+    region: "Cookie consent",
+    title: "We value your privacy",
+    body: "We use essential cookies to make this site work. With your permission we may also use analytics cookies to understand how the site is used. You can change your choice at any time. Read our",
+    policy: "Privacy Policy",
+    essential: "Essential only",
+    accept: "Accept all",
+    href: "/privacy-policy",
+  },
+  es: {
+    region: "Consentimiento de cookies",
+    title: "Valoramos su privacidad",
+    body: "Usamos cookies esenciales para que este sitio funcione. Con su permiso, también podemos usar cookies de análisis para entender cómo se usa el sitio. Puede cambiar su elección en cualquier momento. Lea nuestra",
+    policy: "Política de privacidad",
+    essential: "Solo esenciales",
+    accept: "Aceptar todas",
+    href: "/es/privacy-policy",
+  },
+} as const;
+
 type Choice = { v: 1; analytics: boolean; ts: number };
 
 function read(): Choice | null {
@@ -25,7 +46,8 @@ function save(analytics: boolean) {
 }
 
 /** Cookie consent bar fixed to the bottom of the page. Use with client:load. */
-export default function CookieBanner() {
+export default function CookieBanner({ lang = "en" }: { lang?: "en" | "es" }) {
+  const c = copy[lang];
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false); // drives the slide-in
 
@@ -52,29 +74,28 @@ export default function CookieBanner() {
   return (
     <div
       role="region"
-      aria-label="Cookie consent"
+      aria-label={c.region}
       className={`fixed inset-x-0 bottom-[calc(69px+env(safe-area-inset-bottom))] z-50 p-3 transition duration-500 ease-out motion-reduce:transition-none md:bottom-0 sm:p-5 ${
         show ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       }`}
     >
       <div className="on-dark mx-auto flex max-w-5xl flex-col gap-5 rounded-2xl border border-white/15 bg-ink-deep p-5 text-ivory shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)] sm:p-6 md:flex-row md:items-center md:gap-8">
         <div className="flex-1">
-          <p className="font-display text-2xl leading-tight">We value your privacy</p>
+          <p className="font-display text-2xl leading-tight">{c.title}</p>
           <p className="mt-2 text-sm leading-relaxed text-mist">
-            We use essential cookies to make this site work. With your permission we may also use analytics cookies to
-            understand how the site is used. You can change your choice at any time. Read our{" "}
-            <a href="/privacy-policy" className="font-semibold text-gold underline underline-offset-4 hover:text-gold-light">
-              Privacy Policy
+            {c.body}{" "}
+            <a href={c.href} className="font-semibold text-gold underline underline-offset-4 hover:text-gold-light">
+              {c.policy}
             </a>
             .
           </p>
         </div>
         <div className="flex gap-3 md:shrink-0">
           <button type="button" onClick={() => choose(false)} className="btn btn-outline-light !min-h-12 flex-1 !px-4 md:flex-none md:!px-8">
-            Essential only
+            {c.essential}
           </button>
           <button type="button" onClick={() => choose(true)} className="btn btn-gold !min-h-12 flex-1 !px-4 md:flex-none md:!px-8">
-            Accept all
+            {c.accept}
           </button>
         </div>
       </div>

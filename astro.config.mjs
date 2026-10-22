@@ -6,8 +6,14 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    routing: { prefixDefaultLocale: false },
+  },
   redirects: {
     "/contact": "/contact-us",
+    "/es/contact": "/es/contact-us",
   },
   vite: {
     plugins: [tailwindcss()],

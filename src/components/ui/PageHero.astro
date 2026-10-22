@@ -1,4 +1,6 @@
 ---
+import { lp, getLang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
 interface Props {
   eyebrow: string;
   title: string;
@@ -6,13 +8,15 @@ interface Props {
   intro?: string;
 }
 const { eyebrow, title, accent, intro } = Astro.props;
+const lang = getLang(Astro);
+const t = useUi(lang);
 ---
 
 <section class="on-dark relative isolate overflow-hidden bg-ink text-ivory">
   <div class="absolute -right-32 -top-32 -z-10 h-[30rem] w-[30rem] rounded-full bg-gold/10 blur-3xl" aria-hidden="true"></div>
   <div class="container-x pb-14 pt-14 lg:pb-20 lg:pt-20">
-    <nav aria-label="Breadcrumb" class="text-sm text-mist">
-      <a href="/" class="inline-flex min-h-8 items-center hover:text-ivory">Home</a>
+    <nav aria-label={t.breadcrumb} class="text-sm text-mist">
+      <a href={lp("/", lang)} class="inline-flex min-h-8 items-center hover:text-ivory">{t.home}</a>
       <span aria-hidden="true" class="mx-2">/</span>
       <span aria-current="page" class="text-ivory">{eyebrow}</span>
     </nav>

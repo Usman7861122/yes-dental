@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, contactHref } from "../data/site";
+import { getLang, lp } from "../i18n";
+import { useUi } from "../i18n/ui";
+import PageHero from "../components/ui/PageHero.astro";
+import Insurance from "../components/sections/Insurance.astro";
+import Button from "../components/ui/Button.astro";
+
+const lang = getLang(Astro);
+const t = useUi(lang);
+const copy = {
+  en: {
+    title: "Insurance and Financing Options | Yes Dental",
+    description: "Yes Dental accepts most major dental insurance plans and offers flexible payment options in Manhattan. Call (212) 781-0700.",
+    eyebrow: "Insurance",
+    h1: "Insurance and",
+    accent: "financing options.",
+    intro: "We work with most major plans and offer flexible ways to pay, so great dental care fits your budget.",
+    ctaA: "Not sure what your plan",
+    ctaAccent: "covers?",
+    ctaText: "Tell us your insurance and we will check your benefits before your visit.",
+  },
+  es: {
+    title: "Opciones de seguro y financiamiento | Yes Dental",
+    description: "Yes Dental acepta la mayoría de los seguros dentales y ofrece opciones de pago flexibles en Manhattan. Llame al (212) 781-0700.",
+    eyebrow: "Seguros",
+    h1: "Opciones de seguro y",
+    accent: "financiamiento.",
+    intro: "Trabajamos con la mayoría de los planes principales y ofrecemos formas flexibles de pago, para que una excelente atención dental se ajuste a su presupuesto.",
+    ctaA: "¿No está seguro de qué",
+    ctaAccent: "cubre su plan?",
+    ctaText: "Díganos su seguro y revisaremos sus beneficios antes de su visita.",
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <PageHero
+    eyebrow={copy.eyebrow}
+    title={copy.h1}
+    accent={copy.accent}
+    intro={copy.intro}
+  />
+  <Insurance page />
+  <section class="on-dark bg-ink py-20 text-ivory lg:py-24">
+    <div class="container-x flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+      <div>
+        <h2 class="h-display max-w-2xl">{copy.ctaA} <em class="font-medium italic text-crimson-light">{copy.ctaAccent}</em></h2>
+        <p class="mt-5 text-lg text-mist">{copy.ctaText}</p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <Button href={lp(contactHref, lang)} variant="gold">{t.requestAppointment}</Button>
+        <Button href={`tel:${site.phone.tel}`} variant="outline-light">{t.call} {site.phone.display}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

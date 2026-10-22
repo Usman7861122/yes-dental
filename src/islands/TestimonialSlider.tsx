@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 
-type Item = { quote: string; name: string; place: string; lang?: string };
+import { formatDate } from "../i18n";
+
+type Item = { quote: string; name: string; date?: string; lang?: string };
+type Lang = "en" | "es";
+const t = {
+  en: { region: "Patient testimonials", stars: "5 out of 5 stars", prev: "Previous testimonial", next: "Next testimonial", show: (n: number) => `Show testimonial ${n}` },
+  es: { region: "Testimonios de pacientes", stars: "5 de 5 estrellas", prev: "Testimonio anterior", next: "Testimonio siguiente", show: (n: number) => `Mostrar testimonio ${n}` },
+};
 
 /** Accessible testimonial carousel (no autoplay). Use with client:visible. */
-export default function TestimonialSlider({ items }: { items: Item[] }) {
+export default function TestimonialSlider({ items, lang = "en" }: { items: Item[]; lang?: Lang }) {
+  const l = t[lang];
   const [[index, dir], setPage] = useState<[number, number]>([0, 1]);
   const go = (d: number) => setPage(([i]) => [(i + d + items.length) % items.length, d]);
   const item = items[index];
@@ -13,8 +21,8 @@ export default function TestimonialSlider({ items }: { items: Item[] }) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div role="region" aria-roledescription="carousel" aria-label="Patient testimonials" className="mx-auto max-w-4xl text-center">
-        <div className="flex justify-center gap-1 text-gold-deep" aria-label="5 out of 5 stars" role="img">
+      <div role="region" aria-roledescription="carousel" aria-label={l.region} className="mx-auto max-w-4xl text-center">
+        <div className="flex justify-center gap-1 text-gold-deep" aria-label={l.stars} role="img">
           {Array.from({ length: 5 }).map((_, i) => (
             <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -37,14 +45,14 @@ export default function TestimonialSlider({ items }: { items: Item[] }) {
               </blockquote>
               <figcaption className="mt-7 text-[0.95rem] font-semibold tracking-wide text-ink">
                 {item.name}
-                <span className="font-normal text-mute"> · {item.place}</span>
+                {item.date && <span className="font-normal text-mute"> · {formatDate(item.date, lang)}</span>}
               </figcaption>
             </motion.figure>
           </AnimatePresence>
         </div>
 
         <div className="mt-8 flex items-center justify-center gap-6">
-          <button type="button" className={arrow} onClick={() => go(-1)} aria-label="Previous testimonial">
+          <button type="button" className={arrow} onClick={() => go(-1)} aria-label={l.prev}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
           </button>
           <div className="flex">
@@ -53,7 +61,7 @@ export default function TestimonialSlider({ items }: { items: Item[] }) {
                 key={i}
                 type="button"
                 onClick={() => setPage([i, i > index ? 1 : -1])}
-                aria-label={`Show testimonial ${i + 1}`}
+                aria-label={l.show(i + 1)}
                 aria-current={i === index}
                 className="group flex h-11 w-8 items-center justify-center"
               >
@@ -61,7 +69,7 @@ export default function TestimonialSlider({ items }: { items: Item[] }) {
               </button>
             ))}
           </div>
-          <button type="button" className={arrow} onClick={() => go(1)} aria-label="Next testimonial">
+          <button type="button" className={arrow} onClick={() => go(1)} aria-label={l.next}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </button>
         </div>

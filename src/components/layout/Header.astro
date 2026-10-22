@@ -1,17 +1,24 @@
 ---
-import { site, contactHref, type NavItem } from "../../data/site";
-import { menuServices, serviceHref } from "../../data/services";
+import { site, contactHref, navFor, type NavItem } from "../../data/site";
+import { localizedMenuServices, serviceHrefFor } from "../../data/services";
+import { lp, switchPath, type Lang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
 import MobileMenu from "../../islands/MobileMenu";
 import Icon from "../ui/Icon.astro";
 
-// Same nav for desktop and mobile; "Services" gets a wide dropdown, "Patient Forms" a small one.
-const nav: NavItem[] = site.nav.map((item): NavItem =>
-  item.label === "Services"
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const t = useUi(lang);
+const servicesHref = lp("/services", lang);
+const switchHref = switchPath(Astro.url.pathname, t.switchLang as Lang);
+
+// Same nav for desktop and mobile; "Services" gets a wide dropdown.
+const nav: NavItem[] = navFor(lang).map((item): NavItem =>
+  item.href === servicesHref
     ? {
         ...item,
         wide: true,
-        viewAll: { label: "View all services", href: "/services" },
-        children: menuServices.map((s) => ({ label: s.title, href: serviceHref(s) })),
+        viewAll: { label: t.viewAllServices, href: servicesHref },
+        children: localizedMenuServices(lang).map((s) => ({ label: s.title, href: serviceHrefFor(s, lang) })),
       }
     : item,
 );
@@ -21,11 +28,11 @@ const itemCls =
 
 <header class="sticky top-0 z-40 border-b border-line bg-ivory">
   <div class="container-x flex h-[4.75rem] items-center justify-between gap-4">
-    <a href="/" aria-label={`${site.name} – home`} class="shrink-0">
+    <a href={lp("/", lang)} aria-label={`${site.name} – ${t.homeAria}`} class="shrink-0">
       <img src="/images/logo.png" alt={site.name} width="970" height="248" class="h-12 w-auto xl:h-14" />
     </a>
 
-    <nav aria-label="Main" class="hidden xl:block">
+    <nav aria-label={t.mainNav} class="hidden xl:block">
       <ul class="flex items-center gap-5 2xl:gap-8">
         {
           nav.map((item) => (
@@ -68,7 +75,7 @@ const itemCls =
                           >
                             <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
                             {c.label}
-                            {c.external && <span class="sr-only"> (opens in a new tab)</span>}
+                            {c.external && <span class="sr-only"> {t.newTab}</span>}
                           </a>
                         </li>
                       ))}
@@ -93,8 +100,29 @@ const itemCls =
         <Icon name="phone" size={18} class="text-gold-deep" />
         {site.phone.display}
       </a>
-      <a href={contactHref} class="btn btn-ink hidden !min-h-11 whitespace-nowrap !px-5 sm:inline-flex"><span class="2xl:hidden">Appointment</span><span class="hidden 2xl:inline">Request Appointment</span></a>
-      <MobileMenu client:media="(max-width: 1279px)" nav={nav} phone={site.phone.display} tel={site.phone.tel} contactHref={contactHref} />
+      <a
+        href={switchHref}
+        lang={t.switchLang}
+        hreflang={t.switchLang}
+        aria-label={t.switchAria}
+        class="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border border-line px-3 text-[0.82rem] font-bold tracking-wider text-ink transition-colors hover:border-gold-deep hover:bg-sand"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-gold-deep">
+          <circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" />
+        </svg>
+        <span aria-hidden="true">{t.switchShort}</span>
+      </a>
+      <a href={lp(contactHref, lang)} class="btn btn-ink hidden !min-h-11 whitespace-nowrap !px-5 sm:inline-flex"><span class="2xl:hidden">{t.appointmentShort}</span><span class="hidden 2xl:inline">{t.requestAppointment}</span></a>
+      <MobileMenu
+        client:media="(max-width: 1279px)"
+        nav={nav}
+        phone={site.phone.display}
+        tel={site.phone.tel}
+        contactHref={lp(contactHref, lang)}
+        lang={lang}
+        switchHref={switchHref}
+        labels={{ menu: t.menu, open: t.openMenu, close: t.closeMenu, nav: t.mobileNav, dialog: t.siteMenu, call: t.call, request: t.requestAppointment, switchLabel: t.switchLabel, switchAria: t.switchAria, switchLang: t.switchLang }}
+      />
     </div>
   </div>
 </header>

@@ -1,23 +1,71 @@
 ---
-import { carriers, alsoAccepted } from "../../data/insurance";
+import { carriers } from "../../data/insurance";
 import Reveal from "../../islands/Reveal";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Icon from "../ui/Icon.astro";
 import Button from "../ui/Button.astro";
+import { getLang, lp } from "../../i18n";
+import { contactHref } from "../../data/site";
 const { page = false } = Astro.props;
+const lang = getLang(Astro);
 
-const steps = [
-  { title: "Share your plan", text: "Tell us your insurance when you book. No plan? Ask about our discount membership." },
-  { title: "We check your benefits", text: "Our team confirms what your plan covers, so there are no surprises." },
-  { title: "Know your cost first", text: "You receive a clear estimate and explanation before any treatment begins." },
-];
-
-const faqs = [
-  { q: "Do you accept my insurance?", a: "We accept most major plans, listed above. Call us and we will confirm your benefits." },
-  { q: "Do you accept Medicare or Medicaid?", a: "Yes. We also accept union plans. Please call us to confirm details." },
-  { q: "What if I do not have insurance?", a: "Our discount membership gives you 50%+ off our regular fees for an annual subscription." },
-  { q: "Can I spread the cost of treatment?", a: "Ask our team about flexible payment options. We will explain what is available before you decide." },
-];
+const copy = {
+  en: {
+    eyebrowPage: "Plans & payment",
+    eyebrow: "Insurance & financing",
+    titlePage: "Care that fits your budget.",
+    title: "Insurance and Financing Options",
+    intro: "We work with most major plans and offer flexible ways to pay, so great dental care fits your budget.",
+    flexTitle: "Flexible payment options",
+    flexText: "Not sure what your plan covers? Our team will check your benefits and explain every cost before treatment begins.",
+    flexCta: "Ask About Financing",
+    accepted: "Plans we accept",
+    also: "Also accepted",
+    also_list: ["Medicare", "Medicaid", "Union plans"],
+    note: "Coverage varies by plan. Please call us to confirm your benefits.",
+    how: "How it works",
+    common: "Common questions",
+    steps: [
+      { title: "Share your plan", text: "Tell us your insurance when you book. No plan? Ask about our discount membership." },
+      { title: "We check your benefits", text: "Our team confirms what your plan covers, so there are no surprises." },
+      { title: "Know your cost first", text: "You receive a clear estimate and explanation before any treatment begins." },
+    ],
+    faqs: [
+      { q: "Do you accept my insurance?", a: "We accept most major plans, listed above. Call us and we will confirm your benefits." },
+      { q: "Do you accept Medicare or Medicaid?", a: "Yes. We also accept union plans. Please call us to confirm details." },
+      { q: "What if I do not have insurance?", a: "Our discount membership gives you 50%+ off our regular fees for an annual subscription." },
+      { q: "Can I spread the cost of treatment?", a: "Ask our team about flexible payment options. We will explain what is available before you decide." },
+    ],
+  },
+  es: {
+    eyebrowPage: "Planes y pagos",
+    eyebrow: "Seguros y financiamiento",
+    titlePage: "Atención que se adapta a su presupuesto.",
+    title: "Opciones de seguro y financiamiento",
+    intro: "Trabajamos con la mayoría de los planes principales y ofrecemos formas flexibles de pago, para que una excelente atención dental se ajuste a su presupuesto.",
+    flexTitle: "Opciones de pago flexibles",
+    flexText: "¿No sabe qué cubre su plan? Nuestro equipo revisará sus beneficios y le explicará cada costo antes de comenzar el tratamiento.",
+    flexCta: "Pregunte por el financiamiento",
+    accepted: "Planes que aceptamos",
+    also: "También aceptamos",
+    also_list: ["Medicare", "Medicaid", "Planes sindicales"],
+    note: "La cobertura varía según el plan. Llámenos para confirmar sus beneficios.",
+    how: "Cómo funciona",
+    common: "Preguntas frecuentes",
+    steps: [
+      { title: "Díganos su plan", text: "Indíquenos su seguro al reservar. ¿No tiene seguro? Pregunte por nuestra membresía con descuento." },
+      { title: "Revisamos sus beneficios", text: "Nuestro equipo confirma qué cubre su plan, para que no haya sorpresas." },
+      { title: "Conozca su costo primero", text: "Recibe un presupuesto claro y una explicación antes de comenzar cualquier tratamiento." },
+    ],
+    faqs: [
+      { q: "¿Aceptan mi seguro?", a: "Aceptamos la mayoría de los planes principales, que aparecen arriba. Llámenos y confirmaremos sus beneficios." },
+      { q: "¿Aceptan Medicare o Medicaid?", a: "Sí. También aceptamos planes sindicales. Llámenos para confirmar los detalles." },
+      { q: "¿Qué pasa si no tengo seguro?", a: "Nuestra membresía con descuento le da más del 50 % de descuento en nuestras tarifas regulares con una suscripción anual." },
+      { q: "¿Puedo pagar el tratamiento en partes?", a: "Pregunte a nuestro equipo por las opciones de pago flexibles. Le explicaremos lo que hay disponible antes de que decida." },
+    ],
+  },
+}[lang];
+const { steps, faqs } = copy;
 ---
 
 <section id="insurance" class="section-y bg-ivory">
@@ -25,20 +73,20 @@ const faqs = [
     <!-- LEFT: stays in place until the right column has finished scrolling -->
     <Reveal client:visible className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
       <SectionHeading
-        eyebrow={page ? "Plans & payment" : "Insurance & financing"}
-        title={page ? "Care that fits your budget." : "Insurance and Financing Options"}
-        intro="We work with most major plans and offer flexible ways to pay, so great dental care fits your budget."
+        eyebrow={page ? copy.eyebrowPage : copy.eyebrow}
+        title={page ? copy.titlePage : copy.title}
+        intro={copy.intro}
       />
       <div class="mt-10 rounded-2xl bg-sand p-8">
         <span class="flex h-12 w-12 items-center justify-center rounded-full bg-gold/25 text-gold-deep">
           <Icon name="shield-check" size={24} />
         </span>
-        <h3 class="mt-5 text-3xl">Flexible payment options</h3>
+        <h3 class="mt-5 text-3xl">{copy.flexTitle}</h3>
         <p class="mt-3 text-mute">
-          Not sure what your plan covers? Our team will check your benefits and explain every cost before treatment begins.
+          {copy.flexText}
         </p>
         <div class="mt-6">
-          <Button href="/contact-us" variant="ink">Ask About Financing</Button>
+          <Button href={lp(contactHref, lang)} variant="ink">{copy.flexCta}</Button>
         </div>
       </div>
     </Reveal>
@@ -46,7 +94,7 @@ const faqs = [
     <!-- RIGHT: scrolls with the page -->
     <div class="lg:col-span-7">
       <Reveal client:visible delay={0.1}>
-        <h3 class="eyebrow text-gold-deep">Plans we accept</h3>
+        <h3 class="eyebrow text-gold-deep">{copy.accepted}</h3>
         <ul class="mt-6 flex flex-wrap gap-3">
           {
             carriers.map((c) => (
@@ -56,15 +104,15 @@ const faqs = [
             ))
           }
         </ul>
-        <h3 class="eyebrow mt-10 text-gold-deep">Also accepted</h3>
+        <h3 class="eyebrow mt-10 text-gold-deep">{copy.also}</h3>
         <ul class="mt-6 flex flex-wrap gap-3">
-          {alsoAccepted.map((c) => <li class="rounded-full bg-ink px-6 py-3 font-semibold text-ivory">{c}</li>)}
+          {copy.also_list.map((c) => <li class="rounded-full bg-ink px-6 py-3 font-semibold text-ivory">{c}</li>)}
         </ul>
-        <p class="mt-8 text-sm text-mute">Coverage varies by plan. Please call us to confirm your benefits.</p>
+        <p class="mt-8 text-sm text-mute">{copy.note}</p>
       </Reveal>
 
       <Reveal client:visible className="mt-20">
-        <h3 class="eyebrow text-gold-deep">How it works</h3>
+        <h3 class="eyebrow text-gold-deep">{copy.how}</h3>
         <ol class="mt-6 space-y-5">
           {
             steps.map((s, i) => (
@@ -81,7 +129,7 @@ const faqs = [
       </Reveal>
 
       <Reveal client:visible className="mt-20">
-        <h3 class="eyebrow text-gold-deep">Common questions</h3>
+        <h3 class="eyebrow text-gold-deep">{copy.common}</h3>
         <div class="mt-6 divide-y divide-line border-y border-line">
           {
             faqs.map((f) => (

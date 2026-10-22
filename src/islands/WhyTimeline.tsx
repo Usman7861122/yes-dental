@@ -5,7 +5,7 @@ import { icons } from "../lib/icons";
 type Step = { icon: string; title: string; text: string };
 
 /** Scroll-driven timeline: the gold line fills as you scroll. Use with client:visible. */
-export default function WhyTimeline({ steps }: { steps: Step[] }) {
+export default function WhyTimeline({ steps, stepLabel = "Step" }: { steps: Step[]; stepLabel?: string }) {
   const ref = useRef<HTMLOListElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 65%", "end 55%"] });
   const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
@@ -60,7 +60,7 @@ export default function WhyTimeline({ steps }: { steps: Step[] }) {
                 transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
                 className={`col-start-2 row-start-1 ${left ? "md:col-start-1 md:pr-10 md:text-right" : "md:col-start-3 md:pl-10"}`}
               >
-                <p className="eyebrow text-gold">Step {i + 1}</p>
+                <p className="eyebrow text-gold">{stepLabel} {i + 1}</p>
                 <h3 className="mt-2 font-display text-[clamp(1.9rem,3vw,2.6rem)] leading-[1.05] text-ivory">{s.title}</h3>
                 <p className={`mt-3 max-w-md text-mist ${left ? "md:ml-auto" : ""}`}>{s.text}</p>
               </motion.div>

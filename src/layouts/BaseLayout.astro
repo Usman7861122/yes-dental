@@ -3,18 +3,26 @@ import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import MobileActionBar from "../components/layout/MobileActionBar.astro";
-import { site } from "../data/site";
+import { site, siteCopy } from "../data/site";
+import { getLang, switchPath } from "../i18n";
+import { useUi } from "../i18n/ui";
 import CookieBanner from "../islands/CookieBanner";
 
 interface Props {
   title?: string;
   description?: string;
 }
-const { title = `${site.name} | ${site.tagline}`, description = site.description } = Astro.props;
+const lang = getLang(Astro);
+const t = useUi(lang);
+const copy = siteCopy[lang];
+const { title = `${site.name} | ${copy.tagline}`, description = copy.description } = Astro.props;
+// hreflang alternates need absolute URLs, so they are added only when PUBLIC_SITE_URL is set.
+const base = (import.meta.env.PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
+const path = Astro.url.pathname;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,6 +35,15 @@ const { title = `${site.name} | ${site.tagline}`, description = site.description
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    {
+      base && (
+        <>
+          <link rel="alternate" hreflang="en" href={base + switchPath(path, "en")} />
+          <link rel="alternate" hreflang="es" href={base + switchPath(path, "es")} />
+          <link rel="alternate" hreflang="x-default" href={base + switchPath(path, "en")} />
+        </>
+      )
+    }
     <title>{title}</title>
     <noscript>
       <style>
@@ -42,14 +59,14 @@ const { title = `${site.name} | ${site.tagline}`, description = site.description
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-6 focus:py-3 focus:text-ivory"
     >
-      Skip to content
+      {t.skip}
     </a>
-    <Header />
+    <Header lang={lang} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
-    <MobileActionBar />
-    <CookieBanner client:load />
+    <Footer lang={lang} />
+    <MobileActionBar lang={lang} />
+    <CookieBanner client:load lang={lang} />
   </body>
 </html>

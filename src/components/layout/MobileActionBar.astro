@@ -1,6 +1,11 @@
 ---
 import { site, contactHref } from "../../data/site";
+import { lp, type Lang } from "../../i18n";
+import { useUi } from "../../i18n/ui";
 import Icon from "../ui/Icon.astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+const t = useUi(lang);
 ---
 
 <!-- Phones only: Call + Appointment stay within reach at the bottom of the screen -->
@@ -9,14 +14,14 @@ import Icon from "../ui/Icon.astro";
   class="on-dark fixed inset-x-0 bottom-0 z-40 border-t border-white/15 bg-ink-deep md:hidden"
   style="padding-bottom: env(safe-area-inset-bottom)"
 >
-  <nav aria-label="Quick actions" class="grid grid-cols-2 gap-3 px-3 py-2.5">
+  <nav aria-label={t.quickActions} class="grid grid-cols-2 gap-3 px-3 py-2.5">
     <a href={`tel:${site.phone.tel}`} class="btn btn-outline-light !min-h-12 !gap-2 !px-3 !text-[0.9rem]">
       <Icon name="phone" size={18} />
-      <span class="sr-only">Call </span>{site.phone.display}
+      <span class="sr-only">{t.call} </span>{site.phone.display}
     </a>
-    <a href={contactHref} class="btn btn-gold !min-h-12 !gap-2 !px-3 !text-[0.9rem]">
+    <a href={lp(contactHref, lang)} class="btn btn-gold !min-h-12 !gap-2 !px-3 !text-[0.9rem]">
       <Icon name="calendar" size={18} />
-      Appointment
+      {t.appointmentShort}
     </a>
   </nav>
 </div>

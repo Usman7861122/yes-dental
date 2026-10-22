@@ -1,0 +1,89 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site, fullAddress } from "../data/site";
+import { getLang } from "../i18n";
+
+const lang = getLang(Astro);
+---
+
+<LegalLayout
+  title={lang === "es" ? "Política de accesibilidad" : "Accessibility Policy"}
+  description={lang === "es" ? "El compromiso de Yes Dental de que nuestro sitio web y nuestro consultorio sean accesibles para todos." : "Yes Dental's commitment to making our website and our office accessible to everyone."}
+  updated={lang === "es" ? "7 de octubre de 2026" : "October 7, 2026"}
+>
+  {
+    lang === "es" ? (
+      <>
+  <p>
+    {site.name} quiere que todas las personas puedan usar nuestro sitio web y recibir atención en nuestro consultorio. Nos comprometemos a que nuestro sitio web sea fácil de usar para personas con discapacidades, incluidas las que usan tecnología de asistencia.
+  </p>
+
+  <h2>Nuestro objetivo</h2>
+  <p>Buscamos seguir las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1, nivel AA. Estas pautas ayudan a que el contenido web sea más perceptible, operable, comprensible y robusto.</p>
+
+  <h2>Lo que hacemos</h2>
+  <ul>
+    <li>Usamos encabezados, etiquetas y una estructura de página claros para que el sitio funcione con lectores de pantalla.</li>
+    <li>Hacemos que todo el sitio se pueda usar con el teclado, con un contorno de enfoque visible y un enlace para "Saltar al contenido".</li>
+    <li>Elegimos colores de texto y de fondo con un contraste fuerte.</li>
+    <li>Ofrecemos descripciones de texto para las imágenes importantes.</li>
+    <li>Hacemos que los botones y enlaces sean lo bastante grandes para tocarlos con facilidad en teléfonos y tabletas.</li>
+    <li>Respetamos la configuración de "reducir movimiento" de su dispositivo, desactivando o reduciendo las animaciones.</li>
+    <li>Hacemos que el diseño funcione en pantallas de diferentes tamaños y cuando se agranda el texto.</li>
+    <li>Etiquetamos claramente los campos de los formularios y mostramos mensajes de error útiles.</li>
+  </ul>
+
+  <h2>Limitaciones conocidas</h2>
+  <p>Trabajamos para mejorar el sitio constantemente, pero es posible que algunas partes aún no sean totalmente accesibles. Por ejemplo, el mapa incrustado y algunos contenidos de terceros son proporcionados por otras empresas y podrían no cumplir todas las pautas. Si no puede usar alguna parte del sitio, comuníquese con nosotros y le daremos la información de otra manera.</p>
+
+  <h2>Accesibilidad en nuestro consultorio</h2>
+  <p>Si necesita ayuda o un ajuste para su visita, como acceso sin escalones, más tiempo o información en otro formato, avísenos al reservar. Haremos todo lo posible para que su visita sea cómoda.</p>
+
+  <h2>Díganos cómo podemos mejorar</h2>
+  <p>Si tiene dificultades para usar este sitio web, o tiene una idea para mejorarlo, comuníquese con nosotros. Indíquenos la página, qué ocurrió y el dispositivo o la tecnología de asistencia que usa. Procuramos responder pronto.</p>
+  <p>
+    {site.name}<br />
+    {fullAddress}<br />
+    Teléfono: <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a><br />
+    Correo: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+</>
+    ) : (
+      <>
+  <p>
+    {site.name} wants everyone to be able to use our website and to receive care at our office. We are committed to making our website easy to use for people with disabilities, including people who use assistive technology.
+  </p>
+
+  <h2>Our goal</h2>
+  <p>We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA. These guidelines help make web content more perceivable, operable, understandable and robust.</p>
+
+  <h2>What we do</h2>
+  <ul>
+    <li>Use clear headings, labels and page structure so the site works with screen readers.</li>
+    <li>Make the whole site usable with a keyboard, with a visible focus outline and a "Skip to content" link.</li>
+    <li>Choose text and background colors with strong contrast.</li>
+    <li>Provide text descriptions for meaningful images.</li>
+    <li>Make buttons and links large enough to tap easily on phones and tablets.</li>
+    <li>Respect your device's "reduce motion" setting by turning off or reducing animations.</li>
+    <li>Make the layout work on screens of different sizes and when text is enlarged.</li>
+    <li>Label form fields clearly and show helpful error messages.</li>
+  </ul>
+
+  <h2>Known limitations</h2>
+  <p>We work to improve the site all the time, but some parts may not yet be fully accessible. For example, the embedded map and some third-party content are provided by other companies and may not meet every guideline. If you cannot use any part of the site, please contact us and we will give you the information another way.</p>
+
+  <h2>Accessibility at our office</h2>
+  <p>If you need help or an adjustment for your visit, such as step-free access, extra time, or information in another format, please tell us when you book. We will do our best to make your visit comfortable.</p>
+
+  <h2>Tell us how we can improve</h2>
+  <p>If you have difficulty using this website, or you have an idea to make it better, please contact us. Tell us the page, what happened and the device or assistive technology you use. We aim to reply promptly.</p>
+  <p>
+    {site.name}<br />
+    {fullAddress}<br />
+    Phone: <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a><br />
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+</>
+    )
+  }
+</LegalLayout>
