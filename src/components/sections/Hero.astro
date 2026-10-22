@@ -15,6 +15,7 @@ const copy = {
     cta: "Request Appointment",
     explore: "Explore Services",
     alt: "A woman laughing, showing a bright, healthy smile",
+    multiple: "Multiple",
     facts: ["Dental services under one roof", "Savings with our membership", "Insurance plans accepted"],
   },
   es: {
@@ -26,12 +27,13 @@ const copy = {
     cta: "Solicitar cita",
     explore: "Ver servicios",
     alt: "Una mujer riendo que muestra una sonrisa brillante y sana",
+    multiple: "Varios",
     facts: ["Servicios dentales bajo un mismo techo", "Ahorro con nuestra membresía", "Planes de seguro aceptados"],
   },
 }[lang];
 
 const facts = [
-  { big: "10", small: copy.facts[0] },
+  { big: copy.multiple, small: copy.facts[0], word: true },
   { big: "50%+", small: copy.facts[1] },
   { big: "14+", small: copy.facts[2] },
 ];
@@ -71,7 +73,7 @@ const facts = [
       {
         facts.map((f) => (
           <div class="px-3 py-5 text-center sm:px-8 sm:py-7 sm:text-left sm:first:pl-0">
-            <dt class="font-display text-3xl text-gold sm:text-5xl">{f.big}</dt>
+            <dt class:list={["font-display text-gold", f.word ? "text-2xl sm:text-5xl" : "text-3xl sm:text-5xl"]}>{f.big}</dt>
             <dd class="mt-1 text-xs leading-snug text-mist sm:text-sm">{f.small}</dd>
           </div>
         ))
