@@ -100,19 +100,36 @@ const itemCls =
         <Icon name="phone" size={18} class="text-gold-deep" />
         {site.phone.display}
       </a>
+      <a href={lp(contactHref, lang)} class="btn btn-ink hidden !min-h-11 whitespace-nowrap !px-5 sm:inline-flex"><span class="2xl:hidden">{t.appointmentShort}</span><span class="hidden 2xl:inline">{t.requestAppointment}</span></a>
       <a
         href={switchHref}
         lang={t.switchLang}
         hreflang={t.switchLang}
         aria-label={t.switchAria}
-        class="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border border-line px-3 text-[0.82rem] font-bold tracking-wider text-ink transition-colors hover:border-gold-deep hover:bg-sand"
+        class="ml-1 inline-flex min-h-11 items-center gap-2 rounded-full border border-line py-1 pl-1.5 pr-3.5 text-[0.82rem] font-bold tracking-wider text-ink transition-colors hover:border-gold-deep hover:bg-sand sm:ml-3"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-gold-deep">
-          <circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" />
-        </svg>
+        {
+          t.switchLang === "es" ? (
+            <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" class="shrink-0 rounded-full ring-1 ring-black/10">
+              <clipPath id="flag-es"><circle cx="14" cy="14" r="14" /></clipPath>
+              <g clip-path="url(#flag-es)">
+                <rect width="28" height="28" fill="#c60b1e" />
+                <rect y="7" width="28" height="14" fill="#ffc400" />
+              </g>
+            </svg>
+          ) : (
+            <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" class="shrink-0 rounded-full ring-1 ring-black/10">
+              <clipPath id="flag-us"><circle cx="14" cy="14" r="14" /></clipPath>
+              <g clip-path="url(#flag-us)">
+                <rect width="28" height="28" fill="#fff" />
+                {[0, 2, 4, 6, 8, 10, 12].map((i) => <rect y={i * 28 / 13} width="28" height={28 / 13} fill="#b22234" />)}
+                <rect width="14" height={28 * 7 / 13} fill="#3c3b6e" />
+              </g>
+            </svg>
+          )
+        }
         <span aria-hidden="true">{t.switchShort}</span>
       </a>
-      <a href={lp(contactHref, lang)} class="btn btn-ink hidden !min-h-11 whitespace-nowrap !px-5 sm:inline-flex"><span class="2xl:hidden">{t.appointmentShort}</span><span class="hidden 2xl:inline">{t.requestAppointment}</span></a>
       <MobileMenu
         client:media="(max-width: 1279px)"
         nav={nav}
