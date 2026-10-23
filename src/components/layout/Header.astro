@@ -106,18 +106,10 @@ const itemCls =
         lang={t.switchLang}
         hreflang={t.switchLang}
         aria-label={t.switchAria}
-        class="ml-1 inline-flex min-h-11 items-center gap-2 rounded-full border border-line py-1 pl-1.5 pr-3.5 text-[0.82rem] font-bold tracking-wider text-ink transition-colors hover:border-gold-deep hover:bg-sand sm:ml-3"
+        class:list={["ml-1 inline-flex min-h-11 items-center gap-2 rounded-full border border-line py-1 text-[0.82rem] font-bold tracking-wider text-ink transition-colors hover:border-gold-deep hover:bg-sand sm:ml-3", t.switchLang === "es" ? "px-4" : "pl-1.5 pr-3.5"]}
       >
         {
-          t.switchLang === "es" ? (
-            <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" class="shrink-0 rounded-full ring-1 ring-black/10">
-              <clipPath id="flag-es"><circle cx="14" cy="14" r="14" /></clipPath>
-              <g clip-path="url(#flag-es)">
-                <rect width="28" height="28" fill="#c60b1e" />
-                <rect y="7" width="28" height="14" fill="#ffc400" />
-              </g>
-            </svg>
-          ) : (
+          t.switchLang === "es" ? null : (
             <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" class="shrink-0 rounded-full ring-1 ring-black/10">
               <clipPath id="flag-us"><circle cx="14" cy="14" r="14" /></clipPath>
               <g clip-path="url(#flag-us)">
