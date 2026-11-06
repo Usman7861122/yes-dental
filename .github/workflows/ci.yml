@@ -1,9 +1,15 @@
-name: CI
+name: CI and Deploy
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch: # lets you run it by hand from the Actions tab
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: yes-dental-website
+  AWS_ROLE_ARN: arn:aws:iam::408421298613:role/github-yes-dental-deploy
 
 jobs:
   build:
@@ -28,3 +34,38 @@ jobs:
           name: site-dist
           path: dist
           retention-days: 7
+
+  deploy:
+    # Only deploys from main (never from pull requests)
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # needed to log in to AWS without stored keys
+      contents: read
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Log in to AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Hashed asset files can be cached for a long time
+      - name: Upload assets
+        run: |
+          aws s3 sync dist "s3://$S3_BUCKET" \
+            --exclude "*.html" --exclude "sitemap*" \
+            --cache-control "public,max-age=31536000,immutable"
+
+      # Pages are re-checked every time, then old files are removed
+      - name: Upload pages
+        run: |
+          aws s3 sync dist "s3://$S3_BUCKET" \
+            --exclude "*" --include "*.html" --include "sitemap*" \
+            --cache-control "public,max-age=0,must-revalidate" \
+            --delete
