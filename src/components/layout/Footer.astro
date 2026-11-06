@@ -72,6 +72,7 @@ const featured = localizedServices(lang).filter((s) => s.featured);
         <ul class="mt-4 space-y-1">
           <li><a href={`tel:${site.phone.tel}`} class="inline-flex min-h-11 items-center transition-colors hover:text-gold">{site.phone.display}</a></li>
           <li><a href={`mailto:${site.email}`} class="inline-flex min-h-11 items-center break-all transition-colors hover:text-gold">{site.email}</a></li>
+          <li><a href={lp("/locations/new-york", lang)} class="inline-flex min-h-11 items-center transition-colors hover:text-ivory">{lang === "es" ? "Nuestra ubicación" : "Our location & hours"}</a></li>
           <li>
             <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center font-semibold text-ivory transition-colors hover:text-gold">
               {t.getDirections}<span class="sr-only"> {t.newTab}</span>

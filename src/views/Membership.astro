@@ -1,0 +1,200 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, contactHref } from "../data/site";
+import { getLang, lp } from "../i18n";
+import { useUi } from "../i18n/ui";
+import PageHero from "../components/ui/PageHero.astro";
+import Reveal from "../islands/Reveal";
+import Icon from "../components/ui/Icon.astro";
+import Button from "../components/ui/Button.astro";
+import FaqList from "../components/ui/FaqList.astro";
+
+const lang = getLang(Astro);
+const t = useUi(lang);
+const copy = {
+  en: {
+    title: "Discount Membership Plan | Yes Dental",
+    description: "Yes Dental's discount membership plan gives you 50%+ off regular fees. No insurance needed. Manhattan, NYC.",
+    eyebrow: "Membership Plan",
+    h1: "Premium care,",
+    accent: "made simple.",
+    intro: "Yes Dental provides a discounted membership plan that will give you 50%+ off regular fees.",
+    off: "off our regular fees",
+    badge: "Discount membership",
+    whyTitle: "Why join",
+    why: [
+      { title: "Real savings", text: "Enjoy 50%+ off our regular fees on the care your family needs." },
+      { title: "No insurance needed", text: "The plan works on its own, so you do not need dental insurance to use it." },
+      { title: "Clear costs", text: "We explain your costs before any treatment begins, so there are no surprises." },
+      { title: "For the whole family", text: "Ask our team how the plan can work for you and your family." },
+    ],
+    coversTitle: "Care you can use it for",
+    covers: ["General care", "Professional cleanings", "Root canals", "Orthodontic treatment"],
+    stepsTitle: "How to join",
+    steps: [
+      { title: "Contact us", text: "Call us or send a request. Tell us you are interested in the membership plan." },
+      { title: "We explain the plan", text: "Our team walks you through how it works and answers your questions." },
+      { title: "Start saving", text: "Book your visit and enjoy your member savings on eligible care." },
+    ],
+    faqTitle: "Common questions",
+    faqs: [
+      { q: "How much can I save?", a: "The membership plan gives you 50%+ off our regular fees." },
+      { q: "Do I need dental insurance?", a: "No. The membership plan is a discount plan and does not need insurance." },
+      { q: "Can I use it together with insurance?", a: "Please call us. Our team will explain the best option for you." },
+      { q: "How do I sign up?", a: "Call (212) 781-0700 or send us a request online, and we will help you join." },
+    ],
+    ctaA: "Ready to start",
+    ctaAccent: "saving?",
+    ctaText: "Call us or request an appointment and ask about the membership plan.",
+    note: "Plan details and eligible services are confirmed by our team.",
+  },
+  es: {
+    title: "Plan de membresía con descuento | Yes Dental",
+    description: "El plan de membresía con descuento de Yes Dental le da más del 50 % de descuento en las tarifas regulares. No necesita seguro. Manhattan, Nueva York.",
+    eyebrow: "Plan de membresía",
+    h1: "Atención premium,",
+    accent: "hecha simple.",
+    intro: "Yes Dental ofrece un plan de membresía con descuento que le da más del 50 % de descuento en las tarifas regulares.",
+    off: "de descuento en nuestras tarifas regulares",
+    badge: "Membresía con descuento",
+    whyTitle: "Por qué unirse",
+    why: [
+      { title: "Ahorro real", text: "Disfrute de más del 50 % de descuento en nuestras tarifas regulares, en la atención que su familia necesita." },
+      { title: "No necesita seguro", text: "El plan funciona por sí solo, por lo que no necesita seguro dental para usarlo." },
+      { title: "Costos claros", text: "Le explicamos sus costos antes de comenzar cualquier tratamiento, para que no haya sorpresas." },
+      { title: "Para toda la familia", text: "Pregunte a nuestro equipo cómo puede funcionar el plan para usted y su familia." },
+    ],
+    coversTitle: "Atención para la que puede usarlo",
+    covers: ["Atención general", "Limpiezas profesionales", "Tratamientos de conducto", "Tratamiento de ortodoncia"],
+    stepsTitle: "Cómo unirse",
+    steps: [
+      { title: "Comuníquese con nosotros", text: "Llámenos o envíe una solicitud. Díganos que le interesa el plan de membresía." },
+      { title: "Le explicamos el plan", text: "Nuestro equipo le explica cómo funciona y responde a sus preguntas." },
+      { title: "Empiece a ahorrar", text: "Reserve su visita y disfrute del ahorro de socio en la atención que corresponda." },
+    ],
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿Cuánto puedo ahorrar?", a: "El plan de membresía le da más del 50 % de descuento en nuestras tarifas regulares." },
+      { q: "¿Necesito seguro dental?", a: "No. El plan de membresía es un plan de descuento y no necesita seguro." },
+      { q: "¿Puedo usarlo junto con un seguro?", a: "Llámenos. Nuestro equipo le explicará la mejor opción para usted." },
+      { q: "¿Cómo me inscribo?", a: "Llame al (212) 781-0700 o envíenos una solicitud en línea y le ayudaremos a unirse." },
+    ],
+    ctaA: "¿Listo para empezar a",
+    ctaAccent: "ahorrar?",
+    ctaText: "Llámenos o solicite una cita y pregunte por el plan de membresía.",
+    note: "Nuestro equipo confirma los detalles del plan y los servicios que incluye.",
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.h1} accent={copy.accent} intro={copy.intro} />
+
+  <section class="on-dark relative isolate overflow-hidden bg-ink section-y text-ivory">
+    <div class="absolute -right-40 -top-40 -z-10 h-[40rem] w-[40rem] rounded-full bg-gold/10 blur-3xl" aria-hidden="true"></div>
+    <div class="container-x">
+      <Reveal client:visible>
+        <div class="relative rounded-[2rem] border border-gold/40 p-2 sm:p-3">
+          <div class="grid gap-12 rounded-[1.5rem] border border-gold/20 bg-ink-soft/70 p-8 sm:p-12 lg:grid-cols-2 lg:items-center lg:gap-20 lg:p-16">
+            <div>
+              <p class="eyebrow text-gold">{copy.badge}</p>
+              <p class="mt-6 font-display text-[7rem] font-medium leading-none text-gold sm:text-[10rem]">50<span class="text-6xl sm:text-8xl">%+</span></p>
+              <p class="mt-2 font-display text-3xl text-ivory sm:text-4xl">{copy.off}</p>
+            </div>
+            <div>
+              <h2 class="h-display text-ivory">{copy.coversTitle}</h2>
+              <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+                {
+                  copy.covers.map((c) => (
+                    <li class="flex items-center gap-3">
+                      <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold"><Icon name="check" size={16} stroke={2.2} /></span>
+                      {c}
+                    </li>
+                  ))
+                }
+              </ul>
+              <p class="mt-6 text-sm text-mist">{copy.note}</p>
+              <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+                <a href={lp(contactHref, lang)} class="btn btn-gold">{t.requestAppointment}</a>
+                <a href={`tel:${site.phone.tel}`} class="btn btn-outline-light">{t.call} {site.phone.display}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <section class="section-y bg-ivory">
+    <div class="container-x">
+      <Reveal client:visible>
+        <h2 class="h-display max-w-2xl">{copy.whyTitle}</h2>
+        <span class="mt-7 block h-px w-16 bg-crimson"></span>
+      </Reveal>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          copy.why.map((b, i) => (
+            <li>
+              <Reveal client:visible delay={i * 0.06} className="h-full">
+                <div class="h-full rounded-2xl bg-white p-7 shadow-[0_20px_50px_-35px_rgba(14,26,58,0.5)]">
+                  <span class="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-gold"><Icon name="check" size={20} /></span>
+                  <h3 class="mt-5 text-2xl text-ink">{b.title}</h3>
+                  <p class="mt-2 text-mute">{b.text}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-y bg-sand">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <Reveal client:visible className="lg:sticky lg:top-28 lg:self-start">
+          <h2 class="h-display">{copy.stepsTitle}</h2>
+          <span class="mt-7 block h-px w-16 bg-crimson"></span>
+        </Reveal>
+      </div>
+      <ol class="space-y-5 lg:col-span-7">
+        {
+          copy.steps.map((s, i) => (
+            <li>
+              <Reveal client:visible delay={0.05}>
+                <div class="flex gap-6 rounded-2xl border border-line bg-white p-7">
+                  <span class="font-display text-5xl leading-none text-gold-deep" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 class="text-2xl text-ink"><span class="sr-only">{t.step} {i + 1}: </span>{s.title}</h3>
+                    <p class="mt-2 text-mute">{s.text}</p>
+                  </div>
+                </div>
+              </Reveal>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-y bg-ivory" aria-labelledby="faq-title">
+    <div class="container-x max-w-4xl">
+      <h2 id="faq-title" class="h-display text-center">{copy.faqTitle}</h2>
+      <span class="mx-auto mt-7 block h-px w-16 bg-crimson"></span>
+      <div class="mt-12"><FaqList items={copy.faqs} open /></div>
+    </div>
+  </section>
+
+  <section class="on-dark bg-ink py-20 text-ivory lg:py-24">
+    <div class="container-x flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+      <div>
+        <h2 class="h-display max-w-2xl">{copy.ctaA} <em class="font-medium italic text-crimson-light">{copy.ctaAccent}</em></h2>
+        <p class="mt-5 text-lg text-mist">{copy.ctaText}</p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <Button href={lp(contactHref, lang)} variant="gold">{t.requestAppointment}</Button>
+        <Button href={`tel:${site.phone.tel}`} variant="outline-light">{t.call} {site.phone.display}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

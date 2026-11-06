@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, contactHref } from "../data/site";
+import { localizedServices, serviceHrefFor } from "../data/services";
+import { getLang, lp } from "../i18n";
+import { useUi } from "../i18n/ui";
+import PageHero from "../components/ui/PageHero.astro";
+import VisitBar from "../components/ui/VisitBar.astro";
+import Locations from "../components/sections/Locations.astro";
+import Reveal from "../islands/Reveal";
+import Button from "../components/ui/Button.astro";
+
+const lang = getLang(Astro);
+const t = useUi(lang);
+const services = localizedServices(lang);
+const copy = {
+  en: {
+    title: "Manhattan Dental Office | Yes Dental",
+    description: "Visit Yes Dental at 617 West 181st Street, 2nd Floor, New York, NY 10033. Open Monday to Friday, 10:00 AM to 7:00 PM. Call (212) 781-0700.",
+    eyebrow: "Manhattan Location",
+    h1: "Our Manhattan",
+    accent: "office.",
+    intro: "617 West 181st Street, 2nd Floor, New York, NY 10033. Open Monday to Friday.",
+    aboutTitle: "About Our Clinic",
+    p1: "The gifted dentists at Yes Dental have served the New York City area for over 18 years. Our multi-specialty practice provides comprehensive dental care, including general dentistry, root canals, sleep apnea devices, Invisalign, and orthodontic treatments.",
+    p2: "Our goal is to provide the best dental care in NYC while keeping patients comfortable and confident. We stay current with the latest dental techniques and procedures, always keeping our patients at the center of our practice.",
+    servicesTitle: "Services include",
+    detailsTitle: "Location details",
+    hoursTitle: "Hours",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    open: "10:00 AM – 7:00 PM",
+    closed: "Closed",
+    phone: "Phone",
+    ctaA: "Ready to",
+    ctaAccent: "visit us?",
+  },
+  es: {
+    title: "Consultorio dental en Manhattan | Yes Dental",
+    description: "Visite Yes Dental en 617 West 181st Street, 2nd Floor, New York, NY 10033. Abierto de lunes a viernes, de 10:00 a. m. a 7:00 p. m. Llame al (212) 781-0700.",
+    eyebrow: "Ubicación en Manhattan",
+    h1: "Nuestro consultorio en",
+    accent: "Manhattan.",
+    intro: "617 West 181st Street, 2nd Floor, New York, NY 10033. Abierto de lunes a viernes.",
+    aboutTitle: "Sobre nuestra clínica",
+    p1: "Los dentistas de Yes Dental atienden el área de la ciudad de Nueva York desde hace más de 18 años. Nuestra clínica multiespecialidad ofrece atención dental completa, que incluye odontología general, tratamientos de conducto, aparatos para la apnea del sueño, Invisalign y tratamientos de ortodoncia.",
+    p2: "Nuestra meta es ofrecer la mejor atención dental de Nueva York, manteniendo a los pacientes cómodos y seguros. Nos mantenemos al día con las técnicas y los procedimientos dentales más recientes, y siempre ponemos a nuestros pacientes en el centro de nuestra clínica.",
+    servicesTitle: "Nuestros servicios incluyen",
+    detailsTitle: "Datos de la ubicación",
+    hoursTitle: "Horario",
+    days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+    open: "10:00 a. m. – 7:00 p. m.",
+    closed: "Cerrado",
+    phone: "Teléfono",
+    ctaA: "¿Listo para",
+    ctaAccent: "visitarnos?",
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.h1} accent={copy.accent} intro={copy.intro}>
+    <VisitBar class="mt-12" />
+  </PageHero>
+
+  <section class="section-y bg-ivory">
+    <div class="container-x grid gap-14 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-7">
+        <Reveal client:visible>
+          <h2 class="h-display">{copy.aboutTitle}</h2>
+          <span class="mt-7 block h-px w-16 bg-crimson"></span>
+          <div class="mt-8 space-y-5 text-lg text-mute">
+            <p>{copy.p1}</p>
+            <p>{copy.p2}</p>
+          </div>
+          <h3 class="eyebrow mt-12 text-gold-deep">{copy.servicesTitle}</h3>
+          <ul class="mt-6 flex flex-wrap gap-3">
+            {
+              services.map((s) => (
+                <li>
+                  <a href={serviceHrefFor(s, lang)} class="inline-flex min-h-11 items-center rounded-full border border-ink/20 bg-white px-5 text-[0.9rem] font-semibold text-ink transition duration-300 hover:border-gold-deep hover:bg-sand">{s.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </Reveal>
+      </div>
+
+      <aside class="lg:col-span-5">
+        <Reveal client:visible delay={0.1} className="lg:sticky lg:top-28 lg:self-start">
+          <div class="rounded-2xl bg-sand p-8">
+            <h2 class="text-3xl text-ink">{copy.detailsTitle}</h2>
+            <p class="mt-5 text-ink">
+              <span class="font-semibold">{site.name}</span><br />
+              {site.address.street}<br />
+              {site.address.city}
+            </p>
+            <p class="mt-4 text-ink">
+              <span class="font-semibold">{copy.phone}:</span>
+              <a href={`tel:${site.phone.tel}`} class="ml-1 underline underline-offset-4">{site.phone.display}</a>
+            </p>
+            <h3 class="eyebrow mt-8 text-gold-deep">{copy.hoursTitle}</h3>
+            <dl class="mt-4 divide-y divide-line">
+              {
+                copy.days.map((d, i) => (
+                  <div class="flex justify-between gap-4 py-3">
+                    <dt class="font-semibold text-ink">{d}</dt>
+                    <dd class={i < 5 ? "text-ink" : "text-mute"}>{i < 5 ? copy.open : copy.closed}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+            <div class="mt-8"><Button href={lp(contactHref, lang)} variant="ink">{t.requestAppointment}</Button></div>
+          </div>
+        </Reveal>
+      </aside>
+    </div>
+  </section>
+
+  <Locations tone="sand" />
+</BaseLayout>

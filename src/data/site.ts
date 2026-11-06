@@ -49,7 +49,7 @@ export function navFor(lang: Lang): NavItem[] {
   return [
     { label: l.about, href: lp("/about", lang) },
     { label: l.services, href: lp("/services", lang) },
-    { label: l.membership, href: lp("/#membership", lang) },
+    { label: l.membership, href: lp("/membership-plan", lang) },
     { label: l.insurance, href: lp("/insurance", lang) },
     { label: l.forms, href: lp("/patient-forms", lang) },
     { label: l.testimonials, href: lp("/testimonials", lang) },
