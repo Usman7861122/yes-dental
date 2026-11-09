@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import MobileActionBar from "../components/layout/MobileActionBar.astro";
-import { site, siteCopy } from "../data/site";
+import { site, siteCopy, mapsUrl } from "../data/site";
 import { getLang, switchPath } from "../i18n";
 import { useUi } from "../i18n/ui";
 import CookieBanner from "../islands/CookieBanner";
@@ -11,14 +11,55 @@ import CookieBanner from "../islands/CookieBanner";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean; // keep a page out of search results (e.g. the 404 page)
+  image?: string; // share image path, defaults to the Yes Dental card
 }
 const lang = getLang(Astro);
 const t = useUi(lang);
 const copy = siteCopy[lang];
-const { title = `${site.name} | ${copy.tagline}`, description = copy.description } = Astro.props;
-// hreflang alternates need absolute URLs, so they are added only when PUBLIC_SITE_URL is set.
-const base = (import.meta.env.PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
-const path = Astro.url.pathname;
+const { title = `${site.name} | ${copy.tagline}`, description = copy.description, noindex = false, image = "/images/og-image.jpg" } = Astro.props;
+
+// Absolute URLs come from `site` in astro.config.mjs (https://www.yesdentalny.com).
+const origin = (Astro.site ?? new URL(Astro.url.origin)).origin;
+const abs = (p: string) => new URL(p, origin).href;
+const canonical = abs(switchPath(Astro.url.pathname, lang));
+const alt = { en: abs(switchPath(Astro.url.pathname, "en")), es: abs(switchPath(Astro.url.pathname, "es")) };
+const ogLocale = lang === "es" ? "es_US" : "en_US";
+const ogLocaleAlt = lang === "es" ? "en_US" : "es_US";
+const imageAlt = lang === "es" ? "Yes Dental, odontología en Manhattan" : "Yes Dental, dentist in Manhattan";
+
+// Business data for Google (shown in search and maps). Hours: Monday to Friday, 10:00 to 19:00.
+const dentistLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "@id": `${origin}/#dentist`,
+  name: site.name,
+  url: `${origin}/`,
+  image: abs("/images/og-image.jpg"),
+  logo: abs("/images/logo.png"),
+  description: siteCopy.en.description,
+  telephone: site.phone.tel,
+  email: site.email,
+  medicalSpecialty: "Dentistry",
+  availableLanguage: ["English", "Spanish"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: "New York",
+    addressRegion: "NY",
+    postalCode: "10033",
+    addressCountry: "US",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "10:00",
+      closes: "19:00",
+    },
+  ],
+  hasMap: mapsUrl,
+};
 ---
 
 <!doctype html>
@@ -26,25 +67,50 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {
+      !noindex && (
+        <>
+          <link rel="alternate" hreflang="en" href={alt.en} />
+          <link rel="alternate" hreflang="es" href={alt.es} />
+          <link rel="alternate" hreflang="x-default" href={alt.en} />
+        </>
+      )
+    }
     <meta name="theme-color" content="#0e1a3a" />
-    <link rel="icon" href="/favicon.svg" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    <meta property="og:image" content={abs(image)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={abs(image)} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(dentistLd)} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    {
-      base && (
-        <>
-          <link rel="alternate" hreflang="en" href={base + switchPath(path, "en")} />
-          <link rel="alternate" hreflang="es" href={base + switchPath(path, "es")} />
-          <link rel="alternate" hreflang="x-default" href={base + switchPath(path, "en")} />
-        </>
-      )
-    }
-    <title>{title}</title>
     <noscript>
       <style>
         [data-reveal] {

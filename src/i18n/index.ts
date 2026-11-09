@@ -7,11 +7,20 @@ export function getLang(astro: { currentLocale?: string }): Lang {
   return astro.currentLocale === "es" ? "es" : "en";
 }
 
-/** Prefix an internal path with the language ("/services" → "/es/services"). External, tel: and mailto: links pass through. */
+/** Page paths end with "/" (one URL per page). Files ("/robots.txt"), query strings and #anchors are kept. */
+function withSlash(path: string): string {
+  const m = path.match(/^([^?#]*)(.*)$/)!;
+  let p = m[1] || "/";
+  if (!p.endsWith("/") && !/\.[a-z0-9]+$/i.test(p)) p += "/";
+  return p + m[2];
+}
+
+/** Prefix an internal path with the language ("/services" → "/es/services/"). External, tel: and mailto: links pass through. */
 export function lp(path: string, lang: Lang): string {
-  if (lang === defaultLang || !path.startsWith("/") || path.startsWith("//")) return path;
-  if (path === "/es" || path.startsWith("/es/") || path.startsWith("/es?") || path.startsWith("/es#")) return path;
-  return `/es${path === "/" ? "/" : path}`;
+  if (!path.startsWith("/") || path.startsWith("//")) return path;
+  const isEs = path === "/es" || path.startsWith("/es/") || path.startsWith("/es?") || path.startsWith("/es#");
+  if (lang === defaultLang || isEs) return withSlash(path);
+  return withSlash(`/es${path === "/" ? "/" : path}`);
 }
 
 /** The same page in the other language, from the current URL path. */

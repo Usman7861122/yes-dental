@@ -10,7 +10,7 @@ const copy = {
     policy: "Privacy Policy",
     essential: "Essential only",
     accept: "Accept all",
-    href: "/privacy-policy",
+    href: "/privacy-policy/",
   },
   es: {
     region: "Consentimiento de cookies",
@@ -19,7 +19,7 @@ const copy = {
     policy: "Política de privacidad",
     essential: "Solo esenciales",
     accept: "Aceptar todas",
-    href: "/es/privacy-policy",
+    href: "/es/privacy-policy/",
   },
 } as const;
 

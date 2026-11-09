@@ -10,9 +10,18 @@ import Membership from "../components/sections/Membership.astro";
 import Insurance from "../components/sections/Insurance.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
 import Contact from "../components/sections/Contact.astro";
+import { getLang } from "../i18n";
+const lang = getLang(Astro);
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={lang === "es" ? "Yes Dental | Dentista en Manhattan, Nueva York" : "Yes Dental | Family & Cosmetic Dentist in Manhattan, NYC"}
+  description={
+    lang === "es"
+      ? "Yes Dental, en 617 West 181st Street, Manhattan: implantes, coronas, ortodoncia, tratamientos de conducto y más. Llame al (212) 781-0700."
+      : "Yes Dental, at 617 West 181st Street in Manhattan: implants, crowns, orthodontics, root canals and more. Call (212) 781-0700."
+  }
+>
   <Hero />
   <About />
   <KidsParallax />

@@ -55,17 +55,23 @@ jobs:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      # Hashed asset files can be cached for a long time
-      - name: Upload assets
+      # Build files in _astro/ have a hash in their name, so they can be cached for a year
+      - name: Upload hashed assets
         run: |
-          aws s3 sync dist "s3://$S3_BUCKET" \
-            --exclude "*.html" --exclude "sitemap*" \
+          aws s3 sync dist/_astro "s3://$S3_BUCKET/_astro" \
             --cache-control "public,max-age=31536000,immutable"
 
-      # Pages are re-checked every time, then old files are removed
-      - name: Upload pages
+      # Images, fonts and icons keep the same file name when they change, so cache them for one day
+      - name: Upload images, fonts and icons
         run: |
           aws s3 sync dist "s3://$S3_BUCKET" \
-            --exclude "*" --include "*.html" --include "sitemap*" \
+            --exclude "_astro/*" --exclude "*.html" --exclude "*.xml" --exclude "*.txt" \
+            --cache-control "public,max-age=86400"
+
+      # Pages, sitemap and robots.txt are re-checked on every visit. Old pages are removed.
+      - name: Upload pages, sitemap and robots.txt
+        run: |
+          aws s3 sync dist "s3://$S3_BUCKET" \
+            --exclude "*" --include "*.html" --include "*.xml" --include "*.txt" \
             --cache-control "public,max-age=0,must-revalidate" \
             --delete
