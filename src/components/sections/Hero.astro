@@ -1,5 +1,6 @@
 ---
 import HeroImage from "../../islands/HeroImage";
+import { heroSources } from "../../lib/images";
 import Icon from "../ui/Icon.astro";
 import { getLang, lp } from "../../i18n";
 import { contactHref } from "../../data/site";
@@ -32,6 +33,8 @@ const copy = {
   },
 }[lang];
 
+const hero = await heroSources();
+
 const facts = [
   { big: copy.multiple, small: copy.facts[0], word: true },
   { big: "50%+", small: copy.facts[1] },
@@ -42,7 +45,7 @@ const facts = [
 <section class="on-dark relative isolate flex min-h-[calc(100svh-4.75rem)] flex-col overflow-hidden bg-ink text-ivory">
   <!-- Photo + overlays -->
   <div class="absolute inset-0 -z-10">
-    <HeroImage client:load src="/images/hero-smile.jpg" alt={copy.alt} width={1800} height={1200} />
+    <HeroImage client:idle avif={hero.avif} webp={hero.webp} jpeg={hero.jpeg} alt={copy.alt} width={1800} height={1200} />
     <div class="absolute inset-0 bg-ink/65 lg:hidden"></div>
     <div class="absolute inset-0 hidden bg-[linear-gradient(90deg,#0e1a3a_0%,#0e1a3a_34%,rgba(14,26,58,0.6)_58%,rgba(14,26,58,0.1)_100%)] lg:block"></div>
     <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent"></div>

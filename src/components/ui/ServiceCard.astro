@@ -1,5 +1,7 @@
 ---
+import { Picture } from "astro:assets";
 import Icon from "./Icon.astro";
+import { asset } from "../../lib/images";
 import type { Service } from "../../data/services";
 import { getLang } from "../../i18n";
 import { useUi } from "../../i18n/ui";
@@ -25,11 +27,14 @@ const t = useUi(getLang(Astro));
   ]}
   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
 >
-  <img
-    src={s.image}
-    alt=""
-    width="1000"
-    height="667"
+  <Picture
+    src={asset(s.image)}
+    alt={s.alt}
+    formats={["avif", "webp"]}
+    widths={[480, 768, 1000]}
+    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+    width={1000}
+    height={667}
     loading="lazy"
     decoding="async"
     class="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"

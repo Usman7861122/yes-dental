@@ -7,14 +7,15 @@ interface Props {
   title: string;
   description: string;
   updated: string;
+  metaTitle?: string; // longer title for search results (the page heading stays short)
 }
-const { title, description, updated } = Astro.props;
+const { title, description, updated, metaTitle } = Astro.props;
 const lang = getLang(Astro);
 const t = useUi(lang);
 const updatedLabel = lang === "es" ? "Última actualización" : "Last updated";
 ---
 
-<BaseLayout title={`${title} | Yes Dental`} description={description}>
+<BaseLayout title={metaTitle ?? `${title} | Yes Dental`} description={description}>
   <section class="on-dark bg-ink pb-16 pt-16 text-ivory lg:pb-20 lg:pt-24">
     <div class="container-x">
       <nav aria-label={t.breadcrumb} class="text-sm text-mist">

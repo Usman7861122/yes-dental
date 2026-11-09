@@ -1,0 +1,45 @@
+# Yes Dental
+
+> Yes Dental is a family and cosmetic dental office in Manhattan, New York City (Washington Heights). We offer personal, complete dental care for the whole family in English and Spanish.
+
+- Address: 617 West 181st Street, 2nd Floor, New York, NY 10033
+- Phone: (212) 781-0700
+- Email: info@yesdental.com
+- Hours: Monday to Friday, 10:00 AM to 7:00 PM
+- Languages: English, Spanish (Spanish pages start with /es/)
+- Website: https://www.yesdentalny.com/
+
+## Main pages
+
+- [Home](https://www.yesdentalny.com/)
+- [About](https://www.yesdentalny.com/about/)
+- [Services](https://www.yesdentalny.com/services/)
+- [Membership Plan](https://www.yesdentalny.com/membership-plan/): discount plan for patients without insurance
+- [Insurance](https://www.yesdentalny.com/insurance/)
+- [Patient Forms](https://www.yesdentalny.com/patient-forms/)
+- [Testimonials](https://www.yesdentalny.com/testimonials/)
+- [Location](https://www.yesdentalny.com/locations/new-york/)
+- [Contact and appointments](https://www.yesdentalny.com/contact-us/)
+
+## Services
+
+- [Dental Implants](https://www.yesdentalny.com/services/dental-implants/)
+- [Dentures](https://www.yesdentalny.com/services/dentures/)
+- [Crowns](https://www.yesdentalny.com/services/crowns/)
+- [Gingivitis Treatment](https://www.yesdentalny.com/services/gingivitis-treatment/)
+- [Orthodontics](https://www.yesdentalny.com/services/orthodontics/)
+- [Pediatric Dentistry](https://www.yesdentalny.com/services/pediatric-dentistry/)
+- [Root Canals](https://www.yesdentalny.com/services/root-canals/)
+- [Sleep Apnea](https://www.yesdentalny.com/services/sleep-apnea/)
+- [Wisdom Teeth](https://www.yesdentalny.com/services/wisdom-teeth/)
+- [Veneers](https://www.yesdentalny.com/services/veneers/)
+
+## Legal
+
+- [Privacy Policy](https://www.yesdentalny.com/privacy-policy/)
+- [Terms and Conditions](https://www.yesdentalny.com/terms-and-conditions/)
+- [Accessibility Policy](https://www.yesdentalny.com/accessibility-policy/)
+
+## Notes for AI assistants
+
+- The website content is general information and is not medical advice. To book, call (212) 781-0700 or use the form at https://www.yesdentalny.com/contact-us/.

@@ -48,7 +48,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   dentures: {
     headline: "Dentures made for comfort and a",
     accent: "natural smile.",
-    metaDescription: "Custom full and partial dentures designed for comfort and a natural look at Yes Dental in Manhattan.",
+    metaDescription: "Custom full and partial dentures in Manhattan, NYC, made for comfort and a natural look. Visit Yes Dental and call (212) 781-0700 to book your fitting today.",
     intro: [
       "Dentures replace missing teeth so you can eat well, speak clearly and smile freely. Each set is made to fit your mouth and to look natural next to your own teeth.",
       "We offer full dentures when all teeth are missing and partial dentures when you still have some healthy teeth. We take the time to get the fit right.",
@@ -80,7 +80,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   crowns: {
     headline: "Crowns that protect and",
     accent: "restore.",
-    metaDescription: "Durable, tooth-coloured crowns that repair damaged or weak teeth at Yes Dental in Manhattan.",
+    metaDescription: "Dental crowns in Manhattan, NYC. Strong, tooth-colored crowns that repair damaged teeth and look natural. Visit Yes Dental or call (212) 781-0700 today.",
     intro: [
       "A crown is a cap that covers a tooth that is cracked, worn down, heavily filled or weakened. It restores the tooth's shape, strength and appearance.",
       "Our crowns are tooth-coloured, so they blend in with your natural smile. They are made to fit your bite and feel comfortable from day one.",
@@ -112,7 +112,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   "gingivitis-treatment": {
     headline: "Healthy gums start with",
     accent: "early care.",
-    metaDescription: "Gentle gum disease and gingivitis treatment at Yes Dental in Manhattan. Stop inflammation early and protect your smile.",
+    metaDescription: "Gingivitis and gum disease treatment in Manhattan, NYC. Stop gum bleeding and swelling early and protect your smile. Call Yes Dental at (212) 781-0700.",
     intro: [
       "Gingivitis is the early stage of gum disease. Your gums may look red or swollen, and they may bleed when you brush or floss. The good news is that it can usually be reversed when it is treated early.",
       "Our team will clean away the plaque and tartar that cause the problem and show you simple ways to keep your gums healthy at home.",
@@ -144,7 +144,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   orthodontics: {
     headline: "Straighter teeth, a more",
     accent: "confident you.",
-    metaDescription: "Traditional braces and clear aligners for children, teens and adults at Yes Dental in Manhattan.",
+    metaDescription: "Braces and clear aligners in Manhattan, NYC for kids, teens and adults. Get straighter teeth with Yes Dental. Call (212) 781-0700 to book a consultation.",
     intro: [
       "Orthodontic treatment gently moves your teeth into a healthier, better-looking position. Straight teeth are easier to clean and can improve the way your teeth fit together.",
       "We offer traditional braces and clear aligners for patients of all ages, so you can choose what fits your life.",
@@ -176,7 +176,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   "pediatric-dentistry": {
     headline: "Gentle dental care for",
     accent: "growing smiles.",
-    metaDescription: "Friendly pediatric dental care for children, from their very first visit, with Yes Dental in Manhattan.",
+    metaDescription: "Friendly pediatric dentistry in Manhattan, NYC. Gentle check-ups and cavity care for kids, starting from their first visit. Call Yes Dental at (212) 781-0700.",
     intro: [
       "Healthy habits start early. Our friendly, patient-focused care helps children feel calm and safe at the dentist, from their very first visit.",
       "We take our time, explain things in simple words and make every visit as positive as possible, so your child learns that looking after their teeth can be easy.",
@@ -208,7 +208,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   "root-canals": {
     headline: "Root canal care that saves your",
     accent: "natural tooth.",
-    metaDescription: "Comfortable, expert root canal therapy that relieves pain and saves your natural tooth at Yes Dental in Manhattan.",
+    metaDescription: "Gentle root canal treatment in Manhattan, NYC that relieves tooth pain and saves your natural tooth. Visit Yes Dental or call (212) 781-0700 to book today.",
     intro: [
       "A root canal treats the inside of a tooth when the nerve is infected or damaged. The goal is to relieve your pain and save the tooth so you do not have to have it removed.",
       "Modern root canal treatment is much more comfortable than its reputation. The area is fully numbed, and most patients feel better soon after treatment.",
@@ -240,7 +240,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   "sleep-apnea": {
     headline: "Better sleep without the",
     accent: "snoring.",
-    metaDescription: "Custom oral appliances for sleep apnea and snoring at Yes Dental in Manhattan. Sleep better with your dentist's help.",
+    metaDescription: "Sleep apnea and snoring treatment in Manhattan, NYC with custom oral appliances. Sleep better with Yes Dental. Call (212) 781-0700 to book your visit today.",
     intro: [
       "Sleep apnea causes your breathing to pause or become shallow while you sleep. It can leave you tired during the day and can disturb your partner with loud snoring.",
       "For many patients, a custom oral appliance is a comfortable alternative to other treatments. It is worn during sleep and gently holds your jaw in a position that helps keep your airway open.",
@@ -272,7 +272,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   "wisdom-teeth": {
     headline: "Wisdom teeth removal done with",
     accent: "care.",
-    metaDescription: "Safe, professional wisdom teeth removal that minimizes discomfort and speeds up recovery at Yes Dental in Manhattan.",
+    metaDescription: "Safe wisdom teeth removal in Manhattan, NYC with a focus on comfort and quick recovery. Visit Yes Dental or call (212) 781-0700 to book an evaluation.",
     intro: [
       "Wisdom teeth are the last teeth to come in, usually in the late teens or twenties. If there is not enough room, they can become stuck, painful or infected.",
       "We examine your teeth and X-rays, explain whether removal is the right choice, and carry out extractions with care to keep you comfortable and help you recover quickly.",
@@ -304,7 +304,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
   veneers: {
     headline: "Veneers for a",
     accent: "flawless smile.",
-    metaDescription: "Custom-crafted veneers that transform chipped, stained or uneven teeth at Yes Dental in Manhattan.",
+    metaDescription: "Porcelain veneers in Manhattan, NYC to fix chipped, stained or uneven teeth for a natural, confident smile. Call Yes Dental at (212) 781-0700 to book.",
     intro: [
       "Veneers are thin, custom-made shells that cover the front of your teeth. They can improve the colour, shape, size and look of teeth that are chipped, stained, worn or uneven.",
       "Each veneer is designed to suit your face and your smile, so the result looks natural and feels comfortable.",

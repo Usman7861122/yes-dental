@@ -1,10 +1,13 @@
 ---
+import { getImage } from "astro:assets";
+import { asset } from "../../lib/images";
 import { site } from "../../data/site";
 import Reveal from "../../islands/Reveal";
 import Icon from "../ui/Icon.astro";
 import { getLang } from "../../i18n";
 import { useUi } from "../../i18n/ui";
 
+const bg = await getImage({ src: asset("/images/kids-parallax.jpg"), width: 1400, format: "webp", quality: 55 });
 const lang = getLang(Astro);
 const t = useUi(lang);
 const copy = {
@@ -16,7 +19,7 @@ const copy = {
 <section
   aria-labelledby="kids-title"
   class="on-dark parallax-fixed relative isolate flex min-h-[100svh] items-center bg-ink py-24 text-center text-ivory"
-  style="background-image: url('/images/kids-parallax.jpg')"
+  style={`background-image: url('${bg.src}')`}
 >
   <div class="absolute inset-0 -z-10 bg-ink/70"></div>
   <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/50 via-transparent to-ink/60"></div>

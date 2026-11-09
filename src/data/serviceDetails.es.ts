@@ -37,7 +37,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   dentures: {
     headline: "Dentaduras hechas para su comodidad y una",
     accent: "sonrisa natural.",
-    metaDescription: "Dentaduras completas y parciales a la medida, diseñadas para su comodidad y un aspecto natural, en Yes Dental, en Manhattan.",
+    metaDescription: "Dentaduras completas y parciales a medida en Manhattan, NYC, cómodas y de aspecto natural. Visite Yes Dental y llame al (212) 781-0700 para su cita hoy.",
     intro: [
       "Las dentaduras reemplazan los dientes que faltan para que usted pueda comer bien, hablar con claridad y sonreír con libertad. Cada juego se hace a la medida de su boca y para verse natural junto a sus propios dientes.",
       "Ofrecemos dentaduras completas cuando faltan todos los dientes y dentaduras parciales cuando aún conserva dientes sanos. Nos tomamos el tiempo necesario para lograr un buen ajuste.",
@@ -69,7 +69,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   crowns: {
     headline: "Coronas que protegen y",
     accent: "restauran.",
-    metaDescription: "Coronas duraderas del color de sus dientes que reparan dientes dañados o débiles, en Yes Dental, en Manhattan.",
+    metaDescription: "Coronas dentales en Manhattan, NYC. Coronas resistentes del color de su diente que reparan dientes dañados y se ven naturales. Llame al (212) 781-0700.",
     intro: [
       "Una corona es una cubierta que protege un diente fracturado, desgastado, con una obturación grande o debilitado. Restaura la forma, la fuerza y la apariencia del diente.",
       "Nuestras coronas son del color de sus dientes, por lo que se integran con su sonrisa natural. Se hacen a la medida de su mordida y se sienten cómodas desde el primer día.",
@@ -101,7 +101,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   "gingivitis-treatment": {
     headline: "Las encías sanas comienzan con",
     accent: "cuidado temprano.",
-    metaDescription: "Tratamiento suave de la gingivitis y la enfermedad de las encías en Yes Dental, en Manhattan. Detenga la inflamación a tiempo y proteja su sonrisa.",
+    metaDescription: "Tratamiento de gingivitis y enfermedad de las encías en Manhattan, NYC. Detenga el sangrado y la inflamación a tiempo. Llame a Yes Dental al (212) 781-0700.",
     intro: [
       "La gingivitis es la etapa inicial de la enfermedad de las encías. Las encías pueden verse rojas o hinchadas y sangrar al cepillarse o usar hilo dental. La buena noticia es que, tratada a tiempo, suele poder revertirse.",
       "Nuestro equipo eliminará la placa y el sarro que causan el problema y le mostrará formas sencillas de mantener sanas sus encías en casa.",
@@ -133,7 +133,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   orthodontics: {
     headline: "Dientes más derechos, una versión más",
     accent: "segura de usted.",
-    metaDescription: "Brackets tradicionales y alineadores transparentes para niños, adolescentes y adultos en Yes Dental, en Manhattan.",
+    metaDescription: "Brackets y alineadores transparentes en Manhattan, NYC para niños, jóvenes y adultos. Logre dientes más rectos con Yes Dental. Llame al (212) 781-0700.",
     intro: [
       "El tratamiento de ortodoncia mueve con suavidad sus dientes a una posición más sana y más atractiva. Los dientes derechos son más fáciles de limpiar y pueden mejorar la forma en que encajan entre sí.",
       "Ofrecemos brackets tradicionales y alineadores transparentes para pacientes de todas las edades, para que usted elija lo que mejor se adapte a su vida.",
@@ -165,7 +165,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   "pediatric-dentistry": {
     headline: "Cuidado dental amable para",
     accent: "sonrisas en crecimiento.",
-    metaDescription: "Atención dental pediátrica amable para niños, desde su primera visita, con Yes Dental, en Manhattan.",
+    metaDescription: "Odontología pediátrica amable en Manhattan, NYC. Revisiones suaves y cuidado de caries para niños desde su primera visita. Llame a Yes Dental al (212) 781-0700.",
     intro: [
       "Los hábitos sanos comienzan temprano. Nuestra atención amable y centrada en el paciente ayuda a los niños a sentirse tranquilos y seguros en el dentista, desde su primera visita.",
       "Nos tomamos nuestro tiempo, explicamos las cosas con palabras sencillas y hacemos que cada visita sea lo más positiva posible, para que su hijo aprenda que cuidar sus dientes puede ser fácil.",
@@ -197,7 +197,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   "root-canals": {
     headline: "Tratamiento de conducto que salva su",
     accent: "diente natural.",
-    metaDescription: "Tratamiento de conducto cómodo y experto que alivia el dolor y salva su diente natural, en Yes Dental, en Manhattan.",
+    metaDescription: "Tratamiento de conducto con cuidado en Manhattan, NYC que alivia el dolor y conserva su diente natural. Visite Yes Dental o llame al (212) 781-0700 hoy.",
     intro: [
       "El tratamiento de conducto trata el interior de un diente cuando el nervio está infectado o dañado. El objetivo es aliviar su dolor y salvar el diente para que no tenga que extraerlo.",
       "El tratamiento de conducto moderno es mucho más cómodo de lo que se cree. La zona se adormece por completo y la mayoría de los pacientes se siente mejor poco después del tratamiento.",
@@ -229,7 +229,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   "sleep-apnea": {
     headline: "Un mejor sueño sin los",
     accent: "ronquidos.",
-    metaDescription: "Aparatos orales a la medida para la apnea del sueño y los ronquidos en Yes Dental, en Manhattan. Duerma mejor con la ayuda de su dentista.",
+    metaDescription: "Tratamiento de apnea del sueño y ronquidos en Manhattan, NYC con dispositivos orales a medida. Duerma mejor con Yes Dental. Llame al (212) 781-0700 hoy.",
     intro: [
       "La apnea del sueño hace que su respiración se detenga o se vuelva superficial mientras duerme. Puede dejarlo cansado durante el día y molestar a su pareja con ronquidos fuertes.",
       "Para muchos pacientes, un aparato oral a la medida es una alternativa cómoda a otros tratamientos. Se usa al dormir y mantiene con suavidad la mandíbula en una posición que ayuda a mantener abiertas las vías respiratorias.",
@@ -261,7 +261,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   "wisdom-teeth": {
     headline: "Extracción de muelas del juicio con",
     accent: "cuidado.",
-    metaDescription: "Extracción segura y profesional de las muelas del juicio, que reduce las molestias y acelera la recuperación, en Yes Dental, en Manhattan.",
+    metaDescription: "Extracción segura de muelas del juicio en Manhattan, NYC, con atención a su comodidad y una recuperación rápida. Visite Yes Dental o llame al (212) 781-0700.",
     intro: [
       "Las muelas del juicio son las últimas en salir, por lo general al final de la adolescencia o a los veinte años. Si no hay suficiente espacio, pueden quedar atrapadas, doler o infectarse.",
       "Examinamos sus dientes y radiografías, le explicamos si la extracción es la mejor opción y realizamos las extracciones con cuidado para que esté cómodo y se recupere pronto.",
@@ -293,7 +293,7 @@ export const serviceDetailsEs: Record<string, ServiceDetail> = {
   veneers: {
     headline: "Carillas para una",
     accent: "sonrisa impecable.",
-    metaDescription: "Carillas hechas a la medida que transforman dientes astillados, manchados o desiguales, en Yes Dental, en Manhattan.",
+    metaDescription: "Carillas de porcelana en Manhattan, NYC para corregir dientes astillados, manchados o desiguales con un resultado natural. Llame a Yes Dental al (212) 781-0700.",
     intro: [
       "Las carillas son láminas delgadas, hechas a la medida, que cubren la parte frontal de sus dientes. Pueden mejorar el color, la forma, el tamaño y el aspecto de dientes astillados, manchados, desgastados o desiguales.",
       "Cada carilla se diseña para armonizar con su rostro y su sonrisa, de modo que el resultado se vea natural y se sienta cómodo.",

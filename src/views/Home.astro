@@ -11,7 +11,9 @@ import Insurance from "../components/sections/Insurance.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
 import Contact from "../components/sections/Contact.astro";
 import { getLang } from "../i18n";
+import { heroSources } from "../lib/images";
 const lang = getLang(Astro);
+const hero = await heroSources();
 ---
 
 <BaseLayout
@@ -22,6 +24,7 @@ const lang = getLang(Astro);
       : "Yes Dental, at 617 West 181st Street in Manhattan: implants, crowns, orthodontics, root canals and more. Call (212) 781-0700."
   }
 >
+  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={hero.avif.srcset} imagesizes="100vw" fetchpriority="high" />
   <Hero />
   <About />
   <KidsParallax />

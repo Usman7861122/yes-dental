@@ -1,4 +1,6 @@
 ---
+import { Picture } from "astro:assets";
+import { asset } from "../../lib/images";
 import Reveal from "../../islands/Reveal";
 import Icon from "../ui/Icon.astro";
 import Button from "../ui/Button.astro";
@@ -45,20 +47,26 @@ const points = copy.points;
       <div class="relative mx-auto max-w-md pb-16 lg:mx-0 lg:max-w-none lg:pb-20 lg:pr-20">
         <div class="relative">
           <span class="absolute -left-4 -top-4 hidden h-full w-full rounded-t-[999px] border border-gold sm:block" aria-hidden="true"></span>
-          <img
-            src="/images/about-consult.jpg"
+          <Picture
+            src={asset("/images/about-consult.jpg")}
             alt={copy.alt1}
-            width="1400"
-            height="1050"
+            formats={["avif", "webp"]}
+            widths={[400, 640, 900]}
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            width={1400}
+            height={1050}
             loading="lazy"
             class="relative aspect-[4/5] w-full rounded-t-[999px] object-cover"
           />
         </div>
-        <img
-          src="/images/clinic-modern.jpg"
+        <Picture
+          src={asset("/images/clinic-modern.jpg")}
           alt={copy.alt2}
-          width="1600"
-          height="1070"
+          formats={["avif", "webp"]}
+          widths={[320, 520, 800]}
+          sizes="(min-width: 1024px) 20vw, 55vw"
+          width={1600}
+          height={1070}
           loading="lazy"
           class="absolute -bottom-0 right-0 aspect-[4/3] w-3/5 rounded-2xl border-[6px] border-ivory object-cover shadow-xl lg:w-1/2"
         />

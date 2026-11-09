@@ -1,5 +1,16 @@
 ---
 import "../styles/global.css";
+// Fonts are served from this site (latin letters only, which covers English and Spanish). No call to Google Fonts.
+import "@fontsource/manrope/latin-400.css";
+import "@fontsource/manrope/latin-500.css";
+import "@fontsource/manrope/latin-600.css";
+import "@fontsource/manrope/latin-700.css";
+import "@fontsource/cormorant-garamond/latin-500.css";
+import "@fontsource/cormorant-garamond/latin-500-italic.css";
+import "@fontsource/cormorant-garamond/latin-600.css";
+import "@fontsource/cormorant-garamond/latin-600-italic.css";
+import manropeRegular from "@fontsource/manrope/files/manrope-latin-400-normal.woff2?url";
+import cormorantMedium from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2?url";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import MobileActionBar from "../components/layout/MobileActionBar.astro";
@@ -59,6 +70,10 @@ const dentistLd = {
     },
   ],
   hasMap: mapsUrl,
+  geo: { "@type": "GeoCoordinates", latitude: 40.8497689, longitude: -73.9344609 },
+  areaServed: { "@type": "City", name: "New York" },
+  // Profile links (Google Business Profile, Yelp, social). Add them in site.social in src/data/site.ts.
+  ...(site.social.length ? { sameAs: site.social.map((x) => x.href) } : {}),
 };
 ---
 
@@ -106,12 +121,9 @@ const dentistLd = {
 
     <script type="application/ld+json" set:html={JSON.stringify(dentistLd)} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="font" type="font/woff2" href={manropeRegular} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={cormorantMedium} crossorigin />
+    <slot name="head" />
     <noscript>
       <style>
         [data-reveal] {

@@ -1,4 +1,6 @@
 ---
+import { Picture } from "astro:assets";
+import { asset } from "../lib/images";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { localizedServices, serviceHrefFor } from "../data/services";
 import { getServiceDetail } from "../data/serviceDetails";
@@ -58,7 +60,7 @@ const copy = {
     others: "Conozca nuestros otros servicios",
   },
 }[lang];
-const imgs = [1, 2, 3].map((n) => `/images/services/gallery/${slug}-${n}.jpg`);
+const imgs = [1, 2, 3].map((n) => asset(`/images/services/gallery/${slug}-${n}.jpg`));
 const others = services.filter((s) => s.slug !== slug);
 const apptHref = `${lp(contactHref, lang)}?service=${encodeURIComponent(service.title)}`;
 const isKids = slug === "pediatric-dentistry";
@@ -124,7 +126,7 @@ const faqLd = {
         }
       </Reveal>
       <Reveal client:visible className="lg:col-span-6">
-        <img src={imgs[0]} alt={d.imageAlts[0]} width="1200" height="800" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-3xl object-cover shadow-[0_30px_70px_-35px_rgba(14,26,58,0.6)]" />
+        <Picture src={imgs[0]} alt={d.imageAlts[0]} formats={["avif", "webp"]} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 50vw, 92vw" width={1200} height={800} loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-3xl object-cover shadow-[0_30px_70px_-35px_rgba(14,26,58,0.6)]" />
       </Reveal>
     </div>
   </section>
@@ -133,7 +135,7 @@ const faqLd = {
   <section class="section-y bg-sand">
     <div class="container-x grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
       <Reveal client:visible className="order-2 lg:order-1 lg:col-span-5">
-        <img src={imgs[1]} alt={d.imageAlts[1]} width="1200" height="800" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-3xl object-cover shadow-[0_30px_70px_-35px_rgba(14,26,58,0.6)] lg:aspect-[3/4]" />
+        <Picture src={imgs[1]} alt={d.imageAlts[1]} formats={["avif", "webp"]} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 50vw, 92vw" width={1200} height={800} loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-3xl object-cover shadow-[0_30px_70px_-35px_rgba(14,26,58,0.6)] lg:aspect-[3/4]" />
       </Reveal>
       <div class="order-1 lg:order-2 lg:col-span-7">
         <Reveal client:visible>
@@ -168,7 +170,7 @@ const faqLd = {
           <p class="eyebrow text-gold-deep">{copy.process}</p>
           <h2 class="h-display mt-4">{d.stepsTitle}</h2>
           <span class="mt-7 block h-px w-16 bg-crimson"></span>
-          <img src={imgs[2]} alt={d.imageAlts[2]} width="1200" height="800" loading="lazy" decoding="async" class="mt-10 aspect-[4/3] w-full rounded-3xl object-cover shadow-[0_30px_70px_-35px_rgba(14,26,58,0.6)]" />
+          <Picture src={imgs[2]} alt={d.imageAlts[2]} formats={["avif", "webp"]} widths={[480, 800, 1200]} sizes="(min-width: 1024px) 50vw, 92vw" width={1200} height={800} loading="lazy" decoding="async" class="mt-10 aspect-[4/3] w-full rounded-3xl object-cover shadow-[0_30px_70px_-35px_rgba(14,26,58,0.6)]" />
         </Reveal>
       </div>
       <ol class="space-y-5 lg:col-span-7">
