@@ -27,6 +27,8 @@ jobs:
 
       - name: Check and build
         run: npm run build
+        env:
+          PUBLIC_FORM_ENDPOINT: https://lrldwxpaku65lq2jzrw7q5xvpy0cykqq.lambda-url.us-east-1.on.aws/
 
       - name: Upload build output
         uses: actions/upload-artifact@v4
