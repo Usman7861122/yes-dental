@@ -2,7 +2,7 @@
 // Runs on AWS Lambda (Node.js 22) behind a Function URL and sends the message with Amazon SES.
 //
 // Environment variables (set on the Lambda):
-//   TO_EMAIL     where requests are sent        (alphadeveloper91@gmail.com while testing)
+//   TO_EMAIL     where requests are sent        (one address, or several separated by commas)
 //   FROM_EMAIL   a sender verified in SES        (alphadeveloper91@gmail.com while testing)
 //   ALLOWED_ORIGIN  optional, e.g. https://www.yesdentalny.com (extra check on the Origin header)
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
@@ -59,9 +59,10 @@ export function createHandler(send) {
     if (email && !/^\S+@\S+\.\S+$/.test(email)) errors.email = "invalid";
     if (Object.keys(errors).length) return json(400, { ok: false, error: "validation", fields: errors });
 
-    const to = process.env.TO_EMAIL;
+    // TO_EMAIL can hold one address or several, separated by commas.
+    const to = (process.env.TO_EMAIL ?? "").split(",").map((x) => x.trim()).filter(Boolean);
     const from = process.env.FROM_EMAIL;
-    if (!to || !from) {
+    if (!to.length || !from) {
       console.error("TO_EMAIL or FROM_EMAIL is not set");
       return json(500, { ok: false, error: "not_configured" });
     }
@@ -93,7 +94,7 @@ export function createHandler(send) {
       await send(
         new SendEmailCommand({
           FromEmailAddress: `Yes Dental Website <${from}>`,
-          Destination: { ToAddresses: [to] },
+          Destination: { ToAddresses: to },
           ReplyToAddresses: email ? [email] : undefined,
           Content: {
             Simple: {
