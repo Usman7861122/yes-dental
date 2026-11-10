@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
 import About from "../components/sections/About.astro";
-import KidsParallax from "../components/sections/KidsParallax.astro";
 import Services from "../components/sections/Services.astro";
 import WhyChooseUs from "../components/sections/WhyChooseUs.astro";
 import Locations from "../components/sections/Locations.astro";
@@ -27,7 +26,6 @@ const hero = await heroSources();
   <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={hero.avif.srcset} imagesizes="100vw" fetchpriority="high" />
   <Hero />
   <About />
-  <KidsParallax />
   <Services />
   <WhyChooseUs />
   <Locations />
